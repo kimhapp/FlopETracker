@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FlopE Tracker</string>
+    <string name="welcome_message">Welcome flops!</string>
+    <string name="button_submit">Submit!</string>
+</resources>

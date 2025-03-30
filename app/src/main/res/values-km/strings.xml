@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FlopE Tracker</string>
+    <string name="welcome_message">សូមស្វាគមន៍ flops!</string>
+    <string name="button_submit">ដាក់ស្នើ!</string>
+</resources>
