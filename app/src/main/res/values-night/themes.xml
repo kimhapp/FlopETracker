@@ -4,6 +4,6 @@
         <item name="colorPrimary">@color/primary_light_color</item>
         <item name="colorSurface">@color/background_dark</item>
         <item name="android:windowBackground">@color/background_dark</item>
-        <item name="android:textColor">@color/text_dark_color</item>
+        <item name="android:textColorPrimary">@color/text_dark_color</item>
     </style>
 </resources>

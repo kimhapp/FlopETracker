@@ -1,5 +1,19 @@
 <resources>
-    <string name="app_name">FlopE Tracker</string>
-    <string name="welcome_message">សូមស្វាគមន៍ flops!</string>
+    <!-- Buttons -->
     <string name="button_submit">ដាក់ស្នើ!</string>
+    <string name="button_add_expense">បន្ថែមការចំណាយ</string>
+
+    <!-- Labels -->
+    <string name="welcome_message">សូមស្វាគមន៍ flops!</string>
+    <string name="label_amount">ចំនួនទឹកប្រាក់</string>
+    <string name="label_category">ប្រភេទ</string>
+    <string name="label_remark">ចំណាំ</string>
+
+    <!-- Arrays -->
+    <string-array name="categories_array">
+        <item>អាហារ</item>
+        <item>ការធ្វើដំណើរ</item>
+        <item>ការកម្សាន្ត</item>
+        <item>ផ្សេងទៀត</item>
+    </string-array>
 </resources>

@@ -1,5 +1,26 @@
 <resources>
-    <string name="app_name">FlopE Tracker</string>
-    <string name="welcome_message">Welcome flops!</string>
+    <!-- Non-Translatable -->
+    <string name="app_name" translatable="false">FlopE Tracker</string>
+    <string name="logo_hint" translatable="false">Flop Logo</string>
+    <string name="currency_usd" translatable="false">USD</string>
+    <string name="currency_khr" translatable="false">KHR</string>
+
+    <!-- Translatable -->
+    <!-- Buttons -->
     <string name="button_submit">Submit!</string>
+    <string name="button_add_expense">Add Expense</string>
+
+    <!-- Labels -->
+    <string name="welcome_message">Welcome flops!</string>
+    <string name="label_amount">Amount</string>
+    <string name="label_category">Category</string>
+    <string name="label_remark">Remark</string>
+
+    <!-- Arrays -->
+    <string-array name="categories_array">
+        <item>Food</item>
+        <item>Travel</item>
+        <item>Entertainment</item>
+        <item>Others</item>
+    </string-array>
 </resources>
