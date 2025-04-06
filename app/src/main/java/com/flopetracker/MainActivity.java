@@ -1,6 +1,5 @@
 package com.flopetracker;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -10,12 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.flopetracker.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    private ActivityMainBinding binding;
     private ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -26,13 +26,16 @@ public class MainActivity extends AppCompatActivity {
             }
         );
 
-        binding.submitButton.setOnClickListener(v -> Toast.makeText(MainActivity.this,
-                "Clicked", Toast.LENGTH_SHORT).show()
-        );
+        binding.lastExpense.
 
-        binding.launchButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        binding.addExpense.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddExpenseActivity.class);
             activityResultLauncher.launch(intent);
+        });
+
+        binding.viewExpense.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ExpenseDetailActivity.class);
+            startActivity(intent);
         });
     }
 }

@@ -1,13 +1,18 @@
 <resources>
     <!-- Buttons -->
-    <string name="button_submit">ដាក់ស្នើ!</string>
     <string name="button_add_expense">បន្ថែមការចំណាយ</string>
+    <string name="button_view_expense">មើលលម្អិតការចំណាយ</string>
+    <string name="button_back_home">ត្រឡប់ទៅផ្ទះវិញ</string>
 
     <!-- Labels -->
     <string name="welcome_message">សូមស្វាគមន៍ flops!</string>
     <string name="label_amount">ចំនួនទឹកប្រាក់</string>
     <string name="label_category">ប្រភេទ</string>
     <string name="label_remark">ចំណាំ</string>
+    <string name="title_main_activity">គ្រប់គ្រងការចំណាយរបស់អ្នក, Flops</string>
+    <string name="label_last_expense">ការចំណាយចុងក្រោយរបស់ខ្ញុំគឺ 0</string>
+    <string name="label_message">ការចំណាយចុងក្រោយរបស់ខ្ញុំ</string>
+    <string name="label_created_date">កាលបរិច្ឆេទបង្កើត</string>
 
     <!-- Arrays -->
     <string-array name="categories_array">

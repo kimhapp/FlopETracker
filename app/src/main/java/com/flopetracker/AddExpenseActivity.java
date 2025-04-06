@@ -10,7 +10,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        com.flopetracker.databinding.ActivityAddExpenseBinding binding = ActivityAddExpenseBinding.inflate(getLayoutInflater());
+        ActivityAddExpenseBinding binding = ActivityAddExpenseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Spinner categories_spinner = binding.categoriesSpinner;

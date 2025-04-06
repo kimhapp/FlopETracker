@@ -7,14 +7,19 @@
 
     <!-- Translatable -->
     <!-- Buttons -->
-    <string name="button_submit">Submit!</string>
     <string name="button_add_expense">Add Expense</string>
+    <string name="button_view_expense">View Detail Expense</string>
+    <string name="button_back_home">Back to Home</string>
 
     <!-- Labels -->
     <string name="welcome_message">Welcome flops!</string>
     <string name="label_amount">Amount</string>
     <string name="label_category">Category</string>
     <string name="label_remark">Remark</string>
+    <string name="title_main_activity">Manage Your Expense, Flops</string>
+    <string name="label_last_expense">My last expense was 0</string>
+    <string name="label_message">My last expense</string>
+    <string name="label_created_date">Created Date</string>
 
     <!-- Arrays -->
     <string-array name="categories_array">
