@@ -2,40 +2,56 @@ package com.flopetracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import com.flopetracker.databinding.ActivityMainBinding;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
-    private ActivityResultLauncher<Intent> activityResultLauncher;
+    ActivityMainBinding binding;
+    ActivityResultLauncher<Intent> activityResultLauncher;
+
+    final String[] expenseLabel = {"amount", "currency", "category", "remark", "created_date"};
+    String[] expenseDetails = new String[expenseLabel.length];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Arrays.fill(expenseDetails, "");
 
         activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    String value = result.getData().getStringExtra("key");
-                    Toast.makeText(this, "Received: " + value, Toast.LENGTH_SHORT).show();
+                    for (int i = 0; i < expenseLabel.length; i ++) {
+                        expenseDetails[i] = result.getData().getStringExtra(expenseLabel[i]);
+                    }
                 }
             }
         );
 
-        binding.lastExpense.
+        binding.addExpenseButton.setOnClickListener(v ->
+            activityResultLauncher.launch(new Intent(this, AddExpenseActivity.class)));
 
-        binding.addExpense.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AddExpenseActivity.class);
-            activityResultLauncher.launch(intent);
-        });
-
-        binding.viewExpense.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ExpenseDetailActivity.class);
+        binding.viewExpenseButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ExpenseDetailActivity.class);
+            for (int i = 0; i < expenseLabel.length; i ++) {
+                intent.putExtra(expenseLabel[i], expenseDetails[i]);
+            }
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        String lastExpenseAmountLabel = getString(R.string.label_last_expense) +
+                (expenseDetails[0] != null && !expenseDetails[0].isEmpty() ? expenseDetails[0] + " " + expenseDetails[1] : "0");
+        binding.lastExpenseAmount.setText(lastExpenseAmountLabel);
     }
 }

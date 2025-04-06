@@ -17,7 +17,7 @@
     <string name="label_category">Category</string>
     <string name="label_remark">Remark</string>
     <string name="title_main_activity">Manage Your Expense, Flops</string>
-    <string name="label_last_expense">My last expense was 0</string>
+    <string name="label_last_expense">My last expense was: </string>
     <string name="label_message">My last expense</string>
     <string name="label_created_date">Created Date</string>
 

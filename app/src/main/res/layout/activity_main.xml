@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <Button
-        android:id="@+id/add_expense"
+        android:id="@+id/add_expense_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_add_expense"
@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.511" />
 
     <Button
-        android:id="@+id/view_expense"
+        android:id="@+id/view_expense_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_view_expense"
@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.613" />
 
     <TextView
-        android:id="@+id/last_expense"
+        android:id="@+id/last_expense_amount"
         style="@style/NormalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
