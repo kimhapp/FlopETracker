@@ -2,7 +2,8 @@
     <!-- Buttons -->
     <string name="button_add_expense">បន្ថែមការចំណាយ</string>
     <string name="button_view_expense">មើលលម្អិតការចំណាយ</string>
-    <string name="button_back_home">ត្រឡប់ទៅផ្ទះវិញ</string>
+    <string name="button_expense_list">បញ្ជីចំណាយ</string>
+    <string name="button_home">ផ្ទះ</string>
 
     <!-- Labels -->
     <string name="welcome_message">សូមស្វាគមន៍ flops!</string>

@@ -9,7 +9,8 @@
     <!-- Buttons -->
     <string name="button_add_expense">Add Expense</string>
     <string name="button_view_expense">View Detail Expense</string>
-    <string name="button_back_home">Back to Home</string>
+    <string name="button_expense_list">Expense List</string>
+    <string name="button_home">Home</string>
 
     <!-- Labels -->
     <string name="welcome_message">Welcome flops!</string>
@@ -17,7 +18,7 @@
     <string name="label_category">Category</string>
     <string name="label_remark">Remark</string>
     <string name="title_main_activity">Manage Your Expense, Flops</string>
-    <string name="label_last_expense">My last expense was: </string>
+    <string name="label_last_expense">My last expense was:</string>
     <string name="label_message">My last expense</string>
     <string name="label_created_date">Created Date</string>
 
@@ -28,4 +29,6 @@
         <item>Entertainment</item>
         <item>Others</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

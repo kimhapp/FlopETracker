@@ -26,14 +26,12 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         Arrays.fill(expenseDetails, "");
 
         activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(), result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtras(result.getData());
-                        setResult(RESULT_OK, returnIntent);
-                        finish();
-                    }
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    setResult(RESULT_OK, result.getData());
+                    finish();
                 }
+            }
         );
 
         Intent receiveIntent = getIntent();
@@ -45,7 +43,7 @@ public class ExpenseDetailActivity extends AppCompatActivity {
         }
 
         binding.addExpenseButton.setOnClickListener(v ->
-            startActivity(new Intent(this, AddExpenseActivity.class)));
+            activityResultLauncher.launch(new Intent(this, AddExpenseActivity.class)));
 
         binding.backHomeButton.setOnClickListener(v -> finish());
     }
@@ -54,16 +52,16 @@ public class ExpenseDetailActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        String amountLabel = getString(R.string.label_amount) + expenseDetails[0] + expenseDetails[1];
+        String amountLabel = getString(R.string.label_amount) + ": " + expenseDetails[0] + " " + expenseDetails[1];
         binding.amount.setText(amountLabel);
 
-        String categoryLabel = getString(R.string.label_category) + expenseDetails[2];
+        String categoryLabel = getString(R.string.label_category) + ": " + expenseDetails[2];
         binding.category.setText(categoryLabel);
 
-        String remarkLabel = getString(R.string.label_remark) + expenseDetails[3];
+        String remarkLabel = getString(R.string.label_remark) + ": " + expenseDetails[3];
         binding.remark.setText(remarkLabel);
 
-        String createdDateLabel = getString(R.string.label_created_date) + expenseDetails[4];
+        String createdDateLabel = getString(R.string.label_created_date) + ": " + expenseDetails[4];
         binding.createdDate.setText(createdDateLabel);
     }
 }
