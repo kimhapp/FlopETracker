@@ -1,4 +1,4 @@
-package com.flopetracker;
+package com.flopetracker.MainActivity;
 
 import android.os.Bundle;
 
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.flopetracker.R;
 
 public class HomeFragment extends Fragment {
     TextView last_expense;

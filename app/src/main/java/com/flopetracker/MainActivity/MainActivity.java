@@ -1,4 +1,4 @@
-package com.flopetracker;
+package com.flopetracker.MainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.flopetracker.AddExpenseActivity;
+import com.flopetracker.R;
 import com.flopetracker.databinding.ActivityMainBinding;
 
 import java.util.Arrays;
@@ -41,16 +43,8 @@ public class MainActivity extends AppCompatActivity {
             }
         );
 
-        binding.addExpenseButton.setOnClickListener(v ->
+        binding.bottomNavigation.setOnClickListener(v ->
             activityResultLauncher.launch(new Intent(this, AddExpenseActivity.class)));
-
-        binding.viewExpenseButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ExpenseDetailActivity.class);
-            for (int i = 0; i < expenseLabel.length; i ++) {
-                intent.putExtra(expenseLabel[i], expenseDetails[i]);
-            }
-            activityResultLauncher.launch(intent);
-        });
     }
 
     @Override

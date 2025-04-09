@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity.MainActivity">
 
     <FrameLayout
         android:id="@+id/fragment_container"
