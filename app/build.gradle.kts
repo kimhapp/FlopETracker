@@ -37,6 +37,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.fragment)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.appcompat)
     implementation(libs.material)
