@@ -11,7 +11,9 @@
     <string name="label_category">ប្រភេទ</string>
     <string name="label_remark">ចំណាំ</string>
     <string name="title_main_activity">គ្រប់គ្រងការចំណាយរបស់អ្នក, Flops</string>
-    <string name="label_last_expense">ការចំណាយចុងក្រោយរបស់ខ្ញុំគឺ 0</string>
+    <string name="label_total_USD">ការចំណាយ USD សរុបរបស់ខ្ញុំគឺ៖</string>
+    <string name="label_total_KHR">ការចំណាយ KHR សរុបរបស់ខ្ញុំគឺ៖</string>
+    <string name="label_most_spent_category">ប្រភេទដែលខ្ញុំភាគច្រើនចំណាយលើ៖</string>
     <string name="label_message">ការចំណាយចុងក្រោយរបស់ខ្ញុំ</string>
     <string name="label_date">កាលបរិច្ឆេទ</string>
     <string name="label_view">កមហើញ</string>

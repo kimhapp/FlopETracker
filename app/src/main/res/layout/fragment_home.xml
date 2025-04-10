@@ -26,11 +26,31 @@
 
     <TextView
         style="@style/NormalText"
-        android:id="@+id/last_expense"
+        android:id="@+id/USD_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginEnd="70dp"
-        android:text="@string/label_last_expense"/>
+        android:layout_gravity="center|start"
+        android:layout_marginStart="20dp"
+        android:text="@string/label_total_USD"/>
+
+    <TextView
+        style="@style/NormalText"
+        android:id="@+id/KHR_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/label_total_KHR"/>
+
+    <TextView
+        style="@style/NormalText"
+        android:id="@+id/most_spent_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/label_most_spent_category"/>
 
 </FrameLayout>

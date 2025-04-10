@@ -3,12 +3,9 @@ package com.flopetracker.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import com.flopetracker.R;
 import com.flopetracker.databinding.ActivityMainBinding;
-
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;

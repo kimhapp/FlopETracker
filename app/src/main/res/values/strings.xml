@@ -18,7 +18,9 @@
     <string name="label_category">Category</string>
     <string name="label_remark">Remark</string>
     <string name="title_main_activity">Manage Your Expense, Flops</string>
-    <string name="label_last_expense">My last expense was:</string>
+    <string name="label_total_USD">My total USD expense is:</string>
+    <string name="label_total_KHR">My total KHR expense is:</string>
+    <string name="label_most_spent_category">Category that i mostly spend on:</string>
     <string name="label_message">My last expense</string>
     <string name="label_date">Date</string>
     <string name="label_view">View</string>

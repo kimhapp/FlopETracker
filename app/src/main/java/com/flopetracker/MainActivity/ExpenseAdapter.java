@@ -1,10 +1,13 @@
 package com.flopetracker.MainActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.flopetracker.ExpenseDetailActivity;
 import com.flopetracker.R;
 import java.util.List;
 import DataFolder.ExpenseItem;
@@ -38,6 +41,10 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseViewHolder> {
         holder.categoryView.setText(categoryLabel);
         holder.dateView.setText(dateLabel);
         holder.remarkView.setText(remarkLabel);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ExpenseDetailActivity.class);
+        });
     }
 
     @Override
