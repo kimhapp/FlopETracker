@@ -13,7 +13,9 @@
     <string name="title_main_activity">គ្រប់គ្រងការចំណាយរបស់អ្នក, Flops</string>
     <string name="label_last_expense">ការចំណាយចុងក្រោយរបស់ខ្ញុំគឺ 0</string>
     <string name="label_message">ការចំណាយចុងក្រោយរបស់ខ្ញុំ</string>
-    <string name="label_created_date">កាលបរិច្ឆេទបង្កើត</string>
+    <string name="label_date">កាលបរិច្ឆេទ</string>
+    <string name="label_view">កមហើញ</string>
+    <string name="label_delete">លុប</string>
 
     <!-- Arrays -->
     <string-array name="categories_array">

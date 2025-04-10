@@ -1,4 +1,4 @@
-package com.flopetracker;
+/* package com.flopetracker;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,4 +59,4 @@ public class AddExpenseActivity extends AppCompatActivity {
             finish();
         });
     }
-}
+} */

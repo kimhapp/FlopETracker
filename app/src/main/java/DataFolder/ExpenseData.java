@@ -1,0 +1,39 @@
+package DataFolder;
+
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.List;
+
+public class ExpenseData {
+    private static final List<ExpenseItem> expenses = new ArrayList<>();
+
+    static {
+        try {
+            expenses.add(new ExpenseItem("Lunch", 20000.0, "KHR", "Food", LocalDate.parse("2025-03-01")));
+            expenses.add(new ExpenseItem("Taxi", 2.5, "USD", "Transport", LocalDate.parse("2025-03-02")));
+            expenses.add(new ExpenseItem("Groceries", 80000.0, "KHR", "Shopping", LocalDate.parse("2025-03-03")));
+            expenses.add(new ExpenseItem("Coffee", 3.0, "USD", "Beverage", LocalDate.parse("2025-03-04")));
+            expenses.add(new ExpenseItem("Movie Ticket", 32000.0, "KHR", "Entertainment", LocalDate.parse("2025-03-05")));
+            expenses.add(new ExpenseItem("Dinner", 12.0, "USD", "Food", LocalDate.parse("2025-03-06")));
+            expenses.add(new ExpenseItem("Bus Fare", 6000.0, "KHR", "Transport", LocalDate.parse("2025-03-07")));
+            expenses.add(new ExpenseItem("Gym Membership", 30.0, "USD", "Fitness", LocalDate.parse("2025-03-08")));
+            expenses.add(new ExpenseItem("Electricity Bill", 200000.0, "KHR", "Utilities", LocalDate.parse("2025-03-09")));
+            expenses.add(new ExpenseItem("Internet Bill", 25.0, "USD", "Utilities", LocalDate.parse("2025-03-10")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<ExpenseItem> getDummyExpenses() {
+        return expenses;
+    }
+
+    public static ExpenseItem getExpenseById(String id) {
+        for (ExpenseItem expense : expenses) {
+            if (expense.getId().equals(id)) {
+                return expense;
+            }
+        }
+        return null;
+    }
+}

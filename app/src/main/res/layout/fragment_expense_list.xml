@@ -5,10 +5,63 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity.ExpenseListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler_view" />
+
+    <!-- <ImageView
+        android:id="@+id/logo"
+        android:layout_width="132dp"
+        android:layout_height="124dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/logo_hint"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/HeadingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="280dp"
+        android:text="@string/label_message" />
+
+    <TextView
+        android:id="@+id/amount"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="370dp"
+        android:text="@string/label_amount" />
+
+    <TextView
+        android:id="@+id/category"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="440dp"
+        android:text="@string/label_category" />
+
+    <TextView
+        android:id="@+id/remark"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="520dp"
+        android:text="@string/label_remark" />
+
+    <TextView
+        android:id="@+id/created_date"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="630dp"
+        android:text="@string/label_created_date" /> -->
 
 </FrameLayout>

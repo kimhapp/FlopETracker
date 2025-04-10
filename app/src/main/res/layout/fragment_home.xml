@@ -10,8 +10,8 @@
         android:id="@+id/logo"
         android:layout_width="132dp"
         android:layout_height="124dp"
-        android:layout_gravity="top|center"
-        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
         android:contentDescription="@string/logo_hint"
         android:src="@mipmap/ic_launcher_round" />
 
@@ -31,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="100dp"
         android:text="@string/label_last_expense"/>
 
 </FrameLayout>

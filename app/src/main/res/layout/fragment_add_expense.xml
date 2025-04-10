@@ -3,12 +3,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity.AddExpenseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="132dp"
+        android:layout_height="124dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/logo_hint"
+        android:src="@mipmap/ic_launcher_round" />
+
     <TextView
+        android:id="@+id/title"
+        style="@style/HeadingText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp"
+        android:text="@string/app_name"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/label_amount"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="250dp"
+        android:text="@string/label_amount" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/amount_layout"
+        style="@style/NoUnderlineTextInputLayout"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="285dp"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@id/amount_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/label_amount"
+            android:background="@drawable/ui_border"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_amount_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="345dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioUSD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/currency_usd" />
+
+        <RadioButton
+            android:id="@+id/radioKHR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/currency_khr" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/label_category"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="390dp"
+        android:text="@string/label_category" />
+
+    <Spinner
+        android:id="@+id/categories_spinner"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="430dp"
+        android:background="@drawable/spinner_background"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/label_remark"
+        style="@style/NormalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="490dp"
+        android:text="@string/label_remark" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/remark_layout"
+        style="@style/NoUnderlineTextInputLayout"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="525dp"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@id/remark_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/label_remark"
+            android:background="@drawable/ui_border"
+            android:gravity="top|start"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="3"
+            android:maxLines="3" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/add_expense_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="650dp"
+        android:text="@string/button_add_expense" />
 
 </FrameLayout>

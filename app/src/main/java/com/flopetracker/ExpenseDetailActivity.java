@@ -1,4 +1,4 @@
-package com.flopetracker;
+ package com.flopetracker;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import com.flopetracker.databinding.ActivityExpenseDetailBinding;
 import java.util.Arrays;
 
 public class ExpenseDetailActivity extends AppCompatActivity {
-    ActivityExpenseDetailBinding binding;
+    /* ActivityExpenseDetailBinding binding;
     ActivityResultLauncher<Intent> activityResultLauncher;
 
     final String[] expenseLabel = {"amount", "currency", "category", "remark", "created_date"};
@@ -63,5 +63,5 @@ public class ExpenseDetailActivity extends AppCompatActivity {
 
         String createdDateLabel = getString(R.string.label_created_date) + ": " + expenseDetails[4];
         binding.createdDate.setText(createdDateLabel);
-    }
+    } */
 }
