@@ -22,8 +22,6 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        last_expense = view.findViewById(R.id.last_expense);
-
         return view;
     }
 }

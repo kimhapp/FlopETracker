@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FlopETracker"
         tools:targetApi="31">
         <activity
-            android:name=".ExpenseDetailActivity"
+            android:name=".DetailExpenseActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity.MainActivity"

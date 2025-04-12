@@ -2,6 +2,7 @@ package DataFolder;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 public class ExpenseData {
@@ -35,5 +36,33 @@ public class ExpenseData {
             }
         }
         return null;
+    }
+
+    public static double getTotalExpenseByCurrency(String currency) {
+        double totalExpense = 0.0;
+
+        for (ExpenseItem expense : expenses) {
+            if (expense.getCurrency().equals(currency)) {
+                totalExpense += expense.getAmount();
+            }
+        }
+
+        return totalExpense;
+    }
+
+    public static String getMostSpentCategory() {
+        HashMap<String, Integer> category = new HashMap<>();
+
+        for (ExpenseItem expense : expenses) {
+            if (expense.getCurrency() != null) {
+                category.put(expense.getCategory(), category.getOrDefault(expense.getCategory(), 0) + 1);
+            }
+        }
+
+        category.forEach((k, v) ->
+            if () {
+
+            }
+        );
     }
 }

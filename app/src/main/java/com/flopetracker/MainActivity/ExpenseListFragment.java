@@ -28,7 +28,6 @@ public class ExpenseListFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(new ExpenseAdapter(expenseItemList, requireContext()));
-        Log.d(String.valueOf(this), "HElo");
         return view;
     }
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.flopetracker.ExpenseDetailActivity;
+import com.flopetracker.DetailExpenseActivity;
 import com.flopetracker.R;
 import java.util.List;
 import DataFolder.ExpenseItem;
@@ -43,7 +43,10 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseViewHolder> {
         holder.remarkView.setText(remarkLabel);
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ExpenseDetailActivity.class);
+            Intent intent = new Intent(context, DetailExpenseActivity.class);
+            intent.putExtra("expenseId", item.getId());
+
+            context.startActivity(intent);
         });
     }
 
