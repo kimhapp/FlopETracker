@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExpenseData {
     private static final List<ExpenseItem> expenses = new ArrayList<>();
@@ -50,19 +51,26 @@ public class ExpenseData {
         return totalExpense;
     }
 
-    public static String getMostSpentCategory() {
+    public static String[] getMostSpentCategory() {
         HashMap<String, Integer> category = new HashMap<>();
+        int currentHighNumber = 0;
 
         for (ExpenseItem expense : expenses) {
-            if (expense.getCurrency() != null) {
-                category.put(expense.getCategory(), category.getOrDefault(expense.getCategory(), 0) + 1);
+            String currentCategory = expense.getCategory();
+            int newCount = category.merge(currentCategory, 1, Integer::sum);
+
+            if (newCount > currentHighNumber) {
+                currentHighNumber = newCount;
             }
         }
 
-        category.forEach((k, v) ->
-            if () {
-
+        List<String> mostSpentCategory = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry : category.entrySet()) {
+            if (entry.getValue() == currentHighNumber) {
+                mostSpentCategory.add(entry.getKey());
             }
-        );
+        }
+
+        return mostSpentCategory.toArray(new String[0]);
     }
 }

@@ -9,10 +9,6 @@ import com.flopetracker.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-    ActivityResultLauncher<Intent> activityResultLauncher;
-
-    final String[] expenseLabel = {"amount", "currency", "category", "remark", "created_date"};
-    String[] expenseDetails = new String[expenseLabel.length];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +20,6 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container, new HomeFragment())
                 .commit();
 
-        /* Arrays.fill(expenseDetails, "");
-
-        activityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    for (int i = 0; i < expenseLabel.length; i ++) {
-                        expenseDetails[i] = result.getData().getStringExtra(expenseLabel[i]);
-                    }
-                }
-            }
-        ); */
 
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home_button) {

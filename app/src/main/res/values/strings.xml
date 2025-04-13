@@ -12,6 +12,7 @@
     <string name="button_view_expense">View Detail Expense</string>
     <string name="button_expense_list">Expense List</string>
     <string name="button_home">Home</string>
+    <string name="button_back_home">Back to home</string>
 
     <!-- Labels -->
     <string name="welcome_message">Welcome flops!</string>
@@ -21,7 +22,7 @@
     <string name="title_main_activity">Manage Your Expense, Flops</string>
     <string name="label_total_USD">My total USD expense is:</string>
     <string name="label_total_KHR">My total KHR expense is:</string>
-    <string name="label_most_spent_category">Category that i mostly spend on:</string>
+    <string name="label_most_spent_category">Most Spent Category(ies):</string>
     <string name="label_date">Date</string>
     <string name="label_view">View</string>
     <string name="label_delete">Delete</string>
@@ -29,8 +30,12 @@
     <!-- Arrays -->
     <string-array name="categories_array">
         <item>Food</item>
-        <item>Travel</item>
+        <item>Transport</item>
+        <item>Shopping</item>
+        <item>Beverage</item>
         <item>Entertainment</item>
+        <item>Fitness</item>
+        <item>Utilities</item>
         <item>Others</item>
     </string-array>
 </resources>

@@ -4,6 +4,7 @@
     <string name="button_view_expense">មើលលម្អិតការចំណាយ</string>
     <string name="button_expense_list">បញ្ជីចំណាយ</string>
     <string name="button_home">ផ្ទះ</string>
+    <string name="button_back_home">ត្រលប់ទៅផ្ទះ</string>
 
     <!-- Labels -->
     <string name="welcome_message">សូមស្វាគមន៍ flops!</string>
@@ -11,9 +12,9 @@
     <string name="label_category">ប្រភេទ</string>
     <string name="label_remark">ចំណាំ</string>
     <string name="title_main_activity">គ្រប់គ្រងការចំណាយរបស់អ្នក, Flops</string>
-    <string name="label_total_USD">ការចំណាយ USD សរុបរបស់ខ្ញុំគឺ៖</string>
-    <string name="label_total_KHR">ការចំណាយ KHR សរុបរបស់ខ្ញុំគឺ៖</string>
-    <string name="label_most_spent_category">ប្រភេទដែលខ្ញុំភាគច្រើនចំណាយលើ៖</string>
+    <string name="label_total_USD">ការចំណាយ USD សរុប៖</string>
+    <string name="label_total_KHR">ការចំណាយ KHR សរុប៖</string>
+    <string name="label_most_spent_category">ប្រភេទដែលចំណាយលើភាគច្រើន៖</string>
     <string name="label_date">កាលបរិច្ឆេទ</string>
     <string name="label_view">កមហើញ</string>
     <string name="label_delete">លុប</string>
@@ -21,8 +22,12 @@
     <!-- Arrays -->
     <string-array name="categories_array">
         <item>អាហារ</item>
-        <item>ការធ្វើដំណើរ</item>
+        <item>ការដឹកជញ្ជូន</item>
+        <item>ការដើរទិញឥវ៉ាន់</item>
+        <item>ភេសជ្ជៈ</item>
         <item>ការកម្សាន្ត</item>
-        <item>ផ្សេងទៀត</item>
+        <item>កន្លែងហាត់ប្រាណ</item>
+        <item>ឧបករណ៍ប្រើប្រាស់</item>
+        <item>ផ្សេងៗទៀត</item>
     </string-array>
 </resources>
