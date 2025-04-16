@@ -2,7 +2,6 @@
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.flopetracker.MainActivity.MainActivity;
 import com.flopetracker.databinding.ActivityDetailExpenseBinding;

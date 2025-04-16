@@ -1,8 +1,6 @@
 package com.flopetracker.MainActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import com.flopetracker.R;
 import com.flopetracker.databinding.ActivityMainBinding;

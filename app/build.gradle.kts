@@ -45,6 +45,9 @@ android {
 
 dependencies {
     implementation(libs.fragment)
+    implementation(libs.annotation)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.appcompat)
     implementation(libs.material)
