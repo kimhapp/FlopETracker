@@ -5,6 +5,8 @@
     <string name="button_expense_list">បញ្ជីចំណាយ</string>
     <string name="button_home">ផ្ទះ</string>
     <string name="button_back_home">ត្រលប់ទៅផ្ទះ</string>
+    <string name="button_log_in">ចូល</string>
+    <string name="button_sign_up">ចុះឈ្មោះ</string>
 
     <!-- Labels -->
     <string name="welcome_message">សូមស្វាគមន៍ flops!</string>
@@ -18,6 +20,11 @@
     <string name="label_date">កាលបរិច្ឆេទ</string>
     <string name="label_view">កមហើញ</string>
     <string name="label_delete">លុប</string>
+    <string name="label_email">អុីមែល</string>
+    <string name="label_password">លេខកូដ</string>
+    <string name="label_confirm_password">លេខកូដប្រកដ</string>
+    <string name="label_log_in_msg">សូមស្វាគមន៍ flops, សូមចូល!</string>
+    <string name="label_sign_up_msg">សូមស្វាគមន៍ flops, សូមចុះឈ្មោះ!</string>
 
     <!-- Arrays -->
     <string-array name="categories_array">

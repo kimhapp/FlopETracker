@@ -13,6 +13,8 @@
     <string name="button_expense_list">Expense List</string>
     <string name="button_home">Home</string>
     <string name="button_back_home">Back to home</string>
+    <string name="button_log_in">Log In</string>
+    <string name="button_sign_up">Sign Up</string>
 
     <!-- Labels -->
     <string name="welcome_message">Welcome flops!</string>
@@ -26,6 +28,11 @@
     <string name="label_date">Date</string>
     <string name="label_view">View</string>
     <string name="label_delete">Delete</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_confirm_password">Confirm Password</string>
+    <string name="label_log_in_msg">Welcome flops, please log in!</string>
+    <string name="label_sign_up_msg">Welcome flops, please sign up!</string>
 
     <!-- Arrays -->
     <string-array name="categories_array">
@@ -38,12 +45,4 @@
         <item>Utilities</item>
         <item>Others</item>
     </string-array>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
 </resources>
