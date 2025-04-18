@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.flopetracker.MainActivity.MainActivity;
 import com.flopetracker.databinding.ActivityDetailExpenseBinding;
 import DataFolder.ExpenseData;
-import DataFolder.ExpenseItem;
+import DataFolder.ExpenseModel;
 
  public class DetailExpenseActivity extends AppCompatActivity {
     ActivityDetailExpenseBinding binding;
@@ -24,7 +24,7 @@ import DataFolder.ExpenseItem;
             expenseId = receiveIntent.getExtras().getString("expenseId");
         }
 
-        ExpenseItem selectedExpense = ExpenseData.getExpenseById(expenseId);
+        ExpenseModel selectedExpense = ExpenseData.getExpenseById(expenseId);
 
         binding.backHomeButton.setOnClickListener(item -> startActivity(new Intent(this, MainActivity.class)));
 

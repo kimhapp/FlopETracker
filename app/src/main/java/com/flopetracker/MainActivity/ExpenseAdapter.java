@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.flopetracker.DetailExpenseActivity;
 import com.flopetracker.R;
 import java.util.List;
-import DataFolder.ExpenseItem;
+import DataFolder.ExpenseModel;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseViewHolder> {
 
-    public ExpenseAdapter(List<ExpenseItem> expenseItems, Context context) {
-        this.expenseItems = expenseItems;
+    public ExpenseAdapter(List<ExpenseModel> ExpenseModels, Context context) {
+        this.ExpenseModels = ExpenseModels;
         this.context = context;
     }
 
     Context context;
-    List<ExpenseItem> expenseItems;
+    List<ExpenseModel> ExpenseModels;
 
     @NonNull
     @Override
@@ -30,7 +30,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ExpenseViewHolder holder, int position) {
-        ExpenseItem item = expenseItems.get(position);
+        ExpenseModel item = ExpenseModels.get(position);
 
         String amountLabel = context.getString(R.string.label_amount) + ": " + item.getAmount() + " " + item.getCurrency();
         String categoryLabel = context.getString(R.string.label_category) + ": " + item.getCategory();
@@ -52,6 +52,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseViewHolder> {
 
     @Override
     public int getItemCount() {
-        return expenseItems.size();
+        return ExpenseModels.size();
     }
 }

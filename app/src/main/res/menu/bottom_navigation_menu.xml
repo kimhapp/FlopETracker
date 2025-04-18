@@ -17,4 +17,10 @@
         android:enabled="true"
         android:icon="@drawable/baseline_list_24"
         android:title="@string/button_expense_list" />
+
+    <item
+        android:id="@+id/logout_button"
+        android:enabled="true"
+        android:icon="@drawable/baseline_logout_24"
+        android:title="@string/button_log_out" />
 </menu>

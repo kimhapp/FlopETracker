@@ -14,7 +14,7 @@ import com.flopetracker.R;
 import java.util.List;
 
 import DataFolder.ExpenseData;
-import DataFolder.ExpenseItem;
+import DataFolder.ExpenseModel;
 
 public class ExpenseListFragment extends Fragment {
 
@@ -24,10 +24,10 @@ public class ExpenseListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_expense_list, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        List<ExpenseItem> expenseItemList = ExpenseData.getDummyExpenses();
+        List<ExpenseModel> ExpenseModelList = ExpenseData.getDummyExpenses();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        recyclerView.setAdapter(new ExpenseAdapter(expenseItemList, requireContext()));
+        recyclerView.setAdapter(new ExpenseAdapter(ExpenseModelList, requireContext()));
         return view;
     }
 }
