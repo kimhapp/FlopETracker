@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.flopetracker.LoginActivity;
 import com.flopetracker.R;
@@ -26,23 +27,25 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container, new HomeFragment())
                 .commit();
 
-
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
             if (item.getItemId() == R.id.home_button) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new HomeFragment())
-                        .commit();
-            } else if (item.getItemId() == R.id.add_button) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new AddExpenseFragment())
-                        .commit();
-            } else if (item.getItemId() == R.id.list_button) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new ExpenseListFragment())
-                        .commit();
-            } else if (item.getItemId() == R.id.logout_button) {
-                logOutUser();
+                transaction.replace(R.id.fragment_container, new HomeFragment());
             }
+            else if (item.getItemId() == R.id.add_button) {
+                transaction.replace(R.id.fragment_container, new AddExpenseFragment());
+            }
+            else if (item.getItemId() == R.id.list_button) {
+                transaction.replace(R.id.fragment_container, new ExpenseListFragment());
+            }
+            else if (item.getItemId() == R.id.logout_button) {
+                logOutUser();
+                return true;
+            }
+
+            transaction.addToBackStack(null);
+            transaction.commit();
             return true;
         });
     }
