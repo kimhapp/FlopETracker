@@ -14,6 +14,7 @@
     <string name="label_amount">ចំនួនទឹកប្រាក់</string>
     <string name="label_category">ប្រភេទ</string>
     <string name="label_remark">ចំណាំ</string>
+    <string name="label_created_by">បង្កើតដោយ</string>
     <string name="title_main_activity">គ្រប់គ្រងការចំណាយរបស់អ្នក, Flops</string>
     <string name="label_total_USD">ការចំណាយ USD សរុប៖</string>
     <string name="label_total_KHR">ការចំណាយ KHR សរុប៖</string>

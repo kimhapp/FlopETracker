@@ -4,10 +4,7 @@ import com.flopetracker.API.ApiCallback;
 import com.flopetracker.API.DbGUID;
 import com.flopetracker.API.RetroFitClient;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import DataFolder.ExpenseModel;
 import retrofit2.Call;
@@ -16,7 +13,7 @@ import retrofit2.Response;
 
 public class ExpenseRepository {
     String db_guid = DbGUID.getDbGuid();
-    private ExpenseService expenseService;
+    private final ExpenseService expenseService;
 
     public ExpenseRepository() {
         expenseService = RetroFitClient.getClient().create(ExpenseService.class);
@@ -79,60 +76,6 @@ public class ExpenseRepository {
             @Override
             public void onFailure(Call<ExpenseModel> call, Throwable throwable) {
                 callback.onError("Network Error: " + throwable.getMessage());
-            }
-        });
-    }
-
-    public void getTotalExpensesByAmount(String currency, final ApiCallback<Double> callback) {
-        getExpenses(new ApiCallback<List<ExpenseModel>>() {
-            @Override
-            public void onSuccess(List<ExpenseModel> expenses) {
-                double total = 0.0;
-                for (ExpenseModel expense : expenses) {
-                    if (currency.equals(expense.getCurrency())) {
-                        total += expense.getAmount();
-                    }
-                }
-
-                callback.onSuccess(total);
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                callback.onError("Error: " + errorMessage);
-            }
-        });
-    }
-
-    public void getMostFrequentCategory(final ApiCallback<List<String>> callback) {
-        getExpenses(new ApiCallback<List<ExpenseModel>>() {
-            @Override
-            public void onSuccess(List<ExpenseModel> expenses) {
-                Map<String, Integer> category = new HashMap<>();
-
-                for (ExpenseModel expense : expenses) {
-                    String currentCategory = expense.getCategory();
-                    category.merge(currentCategory, 1, Integer::sum);
-                }
-
-                int maxCount = category.values().stream()
-                        .mapToInt(Integer::intValue)
-                        .max()
-                        .orElse(0);
-
-                List<String> mostFrequentCategory = new ArrayList<>();
-                for(Map.Entry<String, Integer> entry : category.entrySet()) {
-                    if (entry.getValue() == maxCount) {
-                        mostFrequentCategory.add(entry.getKey());
-                    }
-                }
-
-                callback.onSuccess(mostFrequentCategory);
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                callback.onError("Error: " + errorMessage);
             }
         });
     }

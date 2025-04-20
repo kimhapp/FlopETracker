@@ -10,14 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.flopetracker.API.ApiCallback;
+import com.flopetracker.API.Expense.ExpenseRepository;
 import com.flopetracker.R;
 
-import DataFolder.ExpenseData;
+import java.util.List;
+
+import DataFolder.ExpenseModel;
 
 public class HomeFragment extends Fragment {
-    TextView total_KHR, total_USD, mostSpentCategory;
-    String[] categories = ExpenseData.getMostSpentCategory();
+    TextView text_KHR, text_USD, mostSpentCategory;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -25,18 +30,46 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        total_USD = view.findViewById(R.id.USD_total);
-        total_KHR = view.findViewById(R.id.KHR_total);
+        text_KHR = view.findViewById(R.id.USD_total);
+        text_USD = view.findViewById(R.id.KHR_total);
         mostSpentCategory = view.findViewById(R.id.most_spent_category);
 
-        String USD = getString(R.string.label_total_USD) + " " + ExpenseData.getTotalExpenseByCurrency("USD") + " USD";
-        String KHR = getString(R.string.label_total_KHR) + " " + ExpenseData.getTotalExpenseByCurrency("KHR") + " KHR";
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchExpenses();
+    }
+
+    void fetchExpenses() {
+        new ExpenseRepository().getExpenses(new ApiCallback<>() {
+            @Override
+            public void onSuccess(List<ExpenseModel> expenses) {
+                String[] categories = ExpenseModel.getMostFrequentCategory(expenses);
+                double total_KHR = ExpenseModel.getTotalExpenseByCurrency("KHR", expenses);
+                double total_USD = ExpenseModel.getTotalExpenseByCurrency("USD", expenses);
+
+                requireActivity().runOnUiThread(() -> updateUI(total_USD, total_KHR, categories));
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                requireActivity().runOnUiThread(() ->
+                        Toast.makeText(requireContext(), "Fail to get expenses!", Toast.LENGTH_SHORT).show()
+                );
+            }
+        });
+    }
+
+    void updateUI(double total_USD, double total_KHR, String[] categories) {
+        String USD = getString(R.string.label_total_USD) + " " + total_USD + " USD";
+        String KHR = getString(R.string.label_total_KHR) + " " + total_KHR + " KHR";
         String MSC = getString(R.string.label_most_spent_category) + " " + String.join(", ", categories);
 
-        total_USD.setText(USD);
-        total_KHR.setText(KHR);
+        text_USD.setText(USD);
+        text_KHR.setText(KHR);
         mostSpentCategory.setText(MSC);
-
-        return view;
     }
 }

@@ -9,7 +9,7 @@ import com.flopetracker.R;
 
 public class ExpenseViewHolder extends RecyclerView.ViewHolder {
 
-    TextView amountView, categoryView, dateView, remarkView;
+    TextView amountView, categoryView, dateView, remarkView, createdByView;
     public ExpenseViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -17,5 +17,6 @@ public class ExpenseViewHolder extends RecyclerView.ViewHolder {
         categoryView = itemView.findViewById(R.id.category);
         dateView = itemView.findViewById(R.id.date);
         remarkView = itemView.findViewById(R.id.remark);
+        createdByView = itemView.findViewById(R.id.created_by);
     }
 }

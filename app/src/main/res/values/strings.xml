@@ -22,6 +22,7 @@
     <string name="label_amount">Amount</string>
     <string name="label_category">Category</string>
     <string name="label_remark">Remark</string>
+    <string name="label_created_by">Created By</string>
     <string name="title_main_activity">Manage Your Expense, Flops</string>
     <string name="label_total_USD">My total USD expense is:</string>
     <string name="label_total_KHR">My total KHR expense is:</string>

@@ -14,11 +14,11 @@ import retrofit2.http.Query;
 
 public interface ExpenseService {
     @GET("expenses")
-    Call<List<ExpenseModel>> getExpenses(@Header("X-DB-HEADER") String db_guid);
+    Call<List<ExpenseModel>> getExpenses(@Header("X-DB-NAME") String db_guid);
 
     @GET("expenses/{id}")
-    Call<ExpenseModel> getExpense(@Header("X-DB-HEADER") String db_guid, @Path("id") String id);
+    Call<ExpenseModel> getExpense(@Header("X-DB-NAME") String db_guid, @Path("id") String id);
 
     @POST("expenses")
-    Call<ExpenseModel> createExpense(@Header("X-DB-HEADER") String db_guid, @Body ExpenseModel expenseModel);
+    Call<ExpenseModel> createExpense(@Header("X-DB-NAME") String db_guid, @Body ExpenseModel expenseModel);
 }

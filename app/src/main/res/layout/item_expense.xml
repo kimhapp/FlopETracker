@@ -34,10 +34,19 @@
 
     <TextView
         style="@style/SmallText"
+        android:id="@+id/created_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_created_by"
+        android:layout_below="@id/date" />
+
+    <TextView
+        style="@style/SmallText"
         android:id="@+id/remark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_remark"
-        android:layout_below="@id/date" />
+        android:layout_below="@id/created_by" />
+
 
 </RelativeLayout>
