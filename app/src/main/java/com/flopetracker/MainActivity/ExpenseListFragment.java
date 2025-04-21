@@ -67,7 +67,7 @@ public class ExpenseListFragment extends Fragment {
             public void onSuccess(List<ExpenseModel> expenses) {
                 requireActivity().runOnUiThread(() -> {
                     int oldSize = expenseList.size();
-                    int newItems = Math.min(expenses.size() - oldSize, 10);
+                    int newItems = Math.min(expenses.size() - oldSize, 4);
 
                     if (newItems > 0) {
                         for (int i = 0; i < newItems; i++) {
