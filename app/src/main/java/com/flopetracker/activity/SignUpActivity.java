@@ -1,18 +1,32 @@
-package com.flopetracker;
+package com.flopetracker.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.flopetracker.MainActivity.MainActivity;
 import com.flopetracker.databinding.ActivitySignupBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Signup extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     ActivitySignupBinding binding;
     FirebaseAuth mAuth;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            reload();
+        }
+    }
+
+    private void reload() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +49,15 @@ public class Signup extends AppCompatActivity {
             }
         });
 
-        binding.logInLink.setOnClickListener(v -> {
-            startActivity(new Intent(this, LoginActivity.class));
-        });
+        binding.logInLink.setOnClickListener(v ->
+                startActivity(new Intent(this, LoginActivity.class)));
     }
 
     public void registerUser(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = mAuth.getCurrentUser();
+                assert user != null;
                 Log.d("FirebaseAuth", "User registered: " + user.getEmail());
                 startActivity(new Intent(this, MainActivity.class));
                 finish();

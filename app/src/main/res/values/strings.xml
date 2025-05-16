@@ -11,8 +11,11 @@
     <string name="button_add_expense">Add Expense</string>
     <string name="button_view_expense">View Detail Expense</string>
     <string name="button_expense_list">Expense List</string>
+    <string name="button_setting">Setting</string>
     <string name="button_home">Home</string>
     <string name="button_back_home">Back to home</string>
+    <string name="button_add_category">Add category</string>
+    <string name="button_show_categories">Show existing categories</string>
     <string name="button_log_in">Log In</string>
     <string name="button_sign_up">Sign Up</string>
     <string name="button_log_out">Log Out</string>
@@ -27,6 +30,7 @@
     <string name="label_total_USD">My total USD expense is:</string>
     <string name="label_total_KHR">My total KHR expense is:</string>
     <string name="label_most_spent_category">Most Spent Category(ies):</string>
+    <string name="label_add_category">Add New Category</string>
     <string name="label_date">Date</string>
     <string name="label_view">View</string>
     <string name="label_delete">Delete</string>
@@ -37,6 +41,9 @@
     <string name="label_sign_up_msg">Welcome flops, please sign up!</string>
     <string name="label_to_register">Don\'t have an account?</string>
     <string name="label_to_login">Already have an account?</string>
+    <string name="label_language">Language</string>
+    <string name="label_setting">App Setting</string>
+    <string name="label_setting_msg">Configure your preferences below, flops</string>
 
     <!-- Arrays -->
     <string-array name="categories_array">
@@ -49,4 +56,5 @@
         <item>Utilities</item>
         <item>Others</item>
     </string-array>
+    <string name="label_expense_id">Expense Id:</string>
 </resources>

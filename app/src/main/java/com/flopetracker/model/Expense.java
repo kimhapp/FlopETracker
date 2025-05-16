@@ -1,5 +1,6 @@
-package DataFolder;
+package com.flopetracker.model;
 
+import com.flopetracker.util.ISO8601DateAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class ExpenseModel {
+public class Expense {
     @SerializedName("id")
     private String id;
 
@@ -34,7 +35,7 @@ public class ExpenseModel {
     @JsonAdapter(ISO8601DateAdapter.class)
     private Date date;
 
-    public ExpenseModel(double amount, String currency, String category, String remark) {
+    public Expense(double amount, String currency, String category, String remark) {
         this.id = UUID.randomUUID().toString(); // Auto-generate unique ID
         this.remark = remark;
         this.amount = amount;
@@ -53,10 +54,10 @@ public class ExpenseModel {
     public Date getDate() { return date; }
 
     // Methods for data related calculations or logic
-    public static double getTotalExpenseByCurrency(String currency, List<ExpenseModel> expenses) {
+    public static double getTotalExpenseByCurrency(String currency, List<Expense> expenses) {
         double totalExpense = 0.0;
 
-        for (ExpenseModel expense : expenses) {
+        for (Expense expense : expenses) {
             if (expense.getCurrency().equals(currency)) {
                 totalExpense += expense.getAmount();
             }
@@ -65,10 +66,10 @@ public class ExpenseModel {
         return totalExpense;
     }
 
-    public static String[] getMostFrequentCategory(List<ExpenseModel> expenses) {
+    public static String[] getMostFrequentCategory(List<Expense> expenses) {
         Map<String, Integer> category = new HashMap<>();
 
-        for (ExpenseModel expense : expenses) {
+        for (Expense expense : expenses) {
             String currentCategory = expense.getCategory();
             category.merge(currentCategory, 1, Integer::sum);
         }

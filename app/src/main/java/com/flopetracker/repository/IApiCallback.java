@@ -1,6 +1,6 @@
-package com.flopetracker.API;
+package com.flopetracker.repository;
 
-public interface ApiCallback<T> {
+public interface IApiCallback<T> {
     void onSuccess(T result);
     void onError(String errorMessage);
 }

@@ -30,4 +30,12 @@
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
     </style>
+
+    <style name="blue">
+        <item name="android:background">@drawable/rounded_background</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:textColor">@color/background_light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">9sp</item>
+    </style>
 </resources>

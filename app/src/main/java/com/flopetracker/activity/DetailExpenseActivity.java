@@ -1,19 +1,17 @@
- package com.flopetracker;
+ package com.flopetracker.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.flopetracker.API.ApiCallback;
-import com.flopetracker.API.Expense.ExpenseRepository;
-import com.flopetracker.MainActivity.MainActivity;
+import com.flopetracker.repository.IApiCallback;
+import com.flopetracker.repository.ExpenseRepository;
+import com.flopetracker.R;
 import com.flopetracker.databinding.ActivityDetailExpenseBinding;
 
-import DataFolder.ExpenseModel;
+import com.flopetracker.model.Expense;
 
- public class DetailExpenseActivity extends AppCompatActivity {
+ public class DetailExpenseActivity extends BaseActivity {
     ActivityDetailExpenseBinding binding;
     String expenseId;
 
@@ -35,9 +33,9 @@ import DataFolder.ExpenseModel;
     }
 
     void fetchExpense(String expenseId) {
-        new ExpenseRepository().getExpense(expenseId, new ApiCallback<>() {
+        new ExpenseRepository().getExpense(expenseId, new IApiCallback<>() {
             @Override
-            public void onSuccess(ExpenseModel expense) {
+            public void onSuccess(Expense expense) {
                 runOnUiThread(() -> updateUI(binding, expense));
             }
 
@@ -50,7 +48,7 @@ import DataFolder.ExpenseModel;
         });
     }
 
-    void updateUI(ActivityDetailExpenseBinding binding, ExpenseModel selectedExpense) {
+    void updateUI(ActivityDetailExpenseBinding binding, Expense selectedExpense) {
         if (selectedExpense != null) {
             String idLabel = getString(R.string.label_Id) + " " + selectedExpense.getId();
             binding.id.setText(idLabel);

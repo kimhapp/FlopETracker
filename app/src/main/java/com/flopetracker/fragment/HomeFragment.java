@@ -1,4 +1,4 @@
-package com.flopetracker.MainActivity;
+package com.flopetracker.fragment;
 
 import android.os.Bundle;
 
@@ -12,13 +12,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flopetracker.API.ApiCallback;
-import com.flopetracker.API.Expense.ExpenseRepository;
+import com.flopetracker.repository.IApiCallback;
+import com.flopetracker.repository.ExpenseRepository;
 import com.flopetracker.R;
 
 import java.util.List;
 
-import DataFolder.ExpenseModel;
+import com.flopetracker.model.Expense;
 
 public class HomeFragment extends Fragment {
     TextView text_KHR, text_USD, mostSpentCategory;
@@ -44,12 +44,12 @@ public class HomeFragment extends Fragment {
     }
 
     void fetchExpenses() {
-        new ExpenseRepository().getExpenses(new ApiCallback<>() {
+        new ExpenseRepository().getExpenses(new IApiCallback<>() {
             @Override
-            public void onSuccess(List<ExpenseModel> expenses) {
-                String[] categories = ExpenseModel.getMostFrequentCategory(expenses);
-                double total_KHR = ExpenseModel.getTotalExpenseByCurrency("KHR", expenses);
-                double total_USD = ExpenseModel.getTotalExpenseByCurrency("USD", expenses);
+            public void onSuccess(List<Expense> expenses) {
+                String[] categories = Expense.getMostFrequentCategory(expenses);
+                double total_KHR = Expense.getTotalExpenseByCurrency("KHR", expenses);
+                double total_USD = Expense.getTotalExpenseByCurrency("USD", expenses);
 
                 requireActivity().runOnUiThread(() -> updateUI(total_USD, total_KHR, categories));
             }

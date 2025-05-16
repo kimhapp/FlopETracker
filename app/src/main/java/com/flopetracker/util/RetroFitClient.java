@@ -1,4 +1,4 @@
-package com.flopetracker.API;
+package com.flopetracker.util;
 
 import java.util.concurrent.TimeUnit;
 

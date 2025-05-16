@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity.AddExpenseFragment">
+    tools:context=".fragment.AddExpenseFragment">
 
     <ImageView
         android:id="@+id/logo"
@@ -86,12 +86,23 @@
 
     <Spinner
         android:id="@+id/categories_spinner"
-        android:layout_width="370dp"
+        android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="430dp"
         android:background="@drawable/spinner_background"
         android:padding="8dp" />
+
+    <ImageButton
+        android:id="@+id/add_categories_button"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:contentDescription="@string/label_add_category"
+        android:src="@drawable/baseline_add_box_24"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="430dp"
+        />
 
     <TextView
         android:id="@+id/label_remark"

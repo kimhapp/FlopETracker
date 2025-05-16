@@ -1,12 +1,12 @@
-package com.flopetracker.API.Expense;
+package com.flopetracker.repository;
 
-import com.flopetracker.API.ApiCallback;
-import com.flopetracker.API.DbGUID;
-import com.flopetracker.API.RetroFitClient;
+import com.flopetracker.service.ExpenseService;
+import com.flopetracker.util.DbGUID;
+import com.flopetracker.util.RetroFitClient;
 
 import java.util.List;
 
-import DataFolder.ExpenseModel;
+import com.flopetracker.model.Expense;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,12 +19,12 @@ public class ExpenseRepository {
         expenseService = RetroFitClient.getClient().create(ExpenseService.class);
     }
 
-    public void getExpenses(final ApiCallback<List<ExpenseModel>> callback) {
-        Call<List<ExpenseModel>> call = expenseService.getExpenses(db_guid);
+    public void getExpenses(final IApiCallback<List<Expense>> callback) {
+        Call<List<Expense>> call = expenseService.getExpenses(db_guid);
 
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<List<ExpenseModel>> call, Response<List<ExpenseModel>> response) {
+            public void onResponse(Call<List<Expense>> call, Response<List<Expense>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onSuccess(response.body());
                 } else {
@@ -33,18 +33,18 @@ public class ExpenseRepository {
             }
 
             @Override
-            public void onFailure(Call<List<ExpenseModel>> call, Throwable throwable) {
+            public void onFailure(Call<List<Expense>> call, Throwable throwable) {
                 callback.onError("Network Error: " + throwable.getMessage());
             }
         });
     }
 
-    public void getExpense(String id, final ApiCallback<ExpenseModel> callback) {
-        Call<ExpenseModel> call = expenseService.getExpense(db_guid, id);
+    public void getExpense(String id, final IApiCallback<Expense> callback) {
+        Call<Expense> call = expenseService.getExpense(db_guid, id);
 
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<ExpenseModel> call, Response<ExpenseModel> response) {
+            public void onResponse(Call<Expense> call, Response<Expense> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onSuccess(response.body());
                 } else {
@@ -53,18 +53,18 @@ public class ExpenseRepository {
             }
 
             @Override
-            public void onFailure(Call<ExpenseModel> call, Throwable throwable) {
+            public void onFailure(Call<Expense> call, Throwable throwable) {
                 callback.onError("Network Error: " + throwable.getMessage());
             }
         });
     }
 
-    public void createExpense(ExpenseModel expenseModel, final ApiCallback<ExpenseModel> callback) {
-        Call<ExpenseModel> call = expenseService.createExpense(db_guid, expenseModel);
+    public void createExpense(Expense expense, final IApiCallback<Expense> callback) {
+        Call<Expense> call = expenseService.createExpense(db_guid, expense);
 
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<ExpenseModel> call, Response<ExpenseModel> response) {
+            public void onResponse(Call<Expense> call, Response<Expense> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onSuccess(response.body());
                 }
@@ -74,7 +74,7 @@ public class ExpenseRepository {
             }
 
             @Override
-            public void onFailure(Call<ExpenseModel> call, Throwable throwable) {
+            public void onFailure(Call<Expense> call, Throwable throwable) {
                 callback.onError("Network Error: " + throwable.getMessage());
             }
         });

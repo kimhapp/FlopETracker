@@ -3,8 +3,11 @@
     <string name="button_add_expense">បន្ថែមការចំណាយ</string>
     <string name="button_view_expense">មើលលម្អិតការចំណាយ</string>
     <string name="button_expense_list">បញ្ជីចំណាយ</string>
+    <string name="button_setting">ការកំណត់</string>
     <string name="button_home">ផ្ទះ</string>
     <string name="button_back_home">ត្រលប់ទៅផ្ទះ</string>
+    <string name="button_add_category">បន្ថែមប្រភេទ</string>
+    <string name="button_show_categories">បង្ហាញប្រភេទដែលមានស្រាប់</string>
     <string name="button_log_in">ចូលគណនី</string>
     <string name="button_sign_up">ចុះឈ្មោះ</string>
     <string name="button_log_out">ចេញគណនី</string>
@@ -19,6 +22,7 @@
     <string name="label_total_USD">ការចំណាយ USD សរុប៖</string>
     <string name="label_total_KHR">ការចំណាយ KHR សរុប៖</string>
     <string name="label_most_spent_category">ប្រភេទដែលចំណាយលើភាគច្រើន៖</string>
+    <string name="label_add_category">បន្ថែមប្រភេទថ្មី</string>
     <string name="label_date">កាលបរិច្ឆេទ</string>
     <string name="label_view">កមហើញ</string>
     <string name="label_delete">លុប</string>
@@ -29,16 +33,9 @@
     <string name="label_sign_up_msg">សូមស្វាគមន៍ flops, សូមចុះឈ្មោះ!</string>
     <string name="label_to_register">មិនមានគណនីមែនទេ?</string>
     <string name="label_to_login">មានគណនីរួចហើយ?</string>
+    <string name="label_language">ភាសា</string>
+    <string name="label_setting">ការកំណត់កម្មវិធី</string>
+    <string name="label_setting_msg">កំណត់រចនាសម្ព័ន្ធចំណូលចិត្តរបស់អ្នកខាងក្រោម, flops</string>
+    <string name="label_expense_id">Id របស់ការចំណាយ:</string>
 
-    <!-- Arrays -->
-    <string-array name="categories_array">
-        <item>អាហារ</item>
-        <item>ការដឹកជញ្ជូន</item>
-        <item>ការដើរទិញឥវ៉ាន់</item>
-        <item>ភេសជ្ជៈ</item>
-        <item>ការកម្សាន្ត</item>
-        <item>កន្លែងហាត់ប្រាណ</item>
-        <item>ឧបករណ៍ប្រើប្រាស់</item>
-        <item>ផ្សេងៗទៀត</item>
-    </string-array>
 </resources>

@@ -1,5 +1,6 @@
-package com.flopetracker.MainActivity;
+package com.flopetracker.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,18 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.flopetracker.API.ApiCallback;
-import com.flopetracker.API.Expense.ExpenseRepository;
+import com.flopetracker.activity.NewCategoryActivity;
+import com.flopetracker.repository.IApiCallback;
+import com.flopetracker.repository.ExpenseRepository;
 import com.flopetracker.R;
 import com.google.android.material.textfield.TextInputEditText;
 
-import DataFolder.ExpenseModel;
+import com.flopetracker.model.Expense;
 
 public class AddExpenseFragment extends Fragment {
     TextInputEditText amountInput;
@@ -41,7 +43,13 @@ public class AddExpenseFragment extends Fragment {
         categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoriesSpinner.setAdapter(categoriesAdapter);
 
+        ImageButton add_category_button = view.findViewById(R.id.add_categories_button);
+
         Button add_button = view.findViewById(R.id.add_expense_button);
+
+        add_category_button.setOnClickListener(v -> startActivity(new Intent(
+                requireContext(), NewCategoryActivity.class
+        )));
 
         add_button.setOnClickListener(v -> {
             amountInput = view.findViewById(R.id.amount_input);
@@ -54,7 +62,7 @@ public class AddExpenseFragment extends Fragment {
 
             double amount = Double.parseDouble(amountInput.getText().toString());
 
-            ExpenseModel createdExpense = new ExpenseModel(
+            Expense createdExpense = new Expense(
                     amount,
                     radioButton.getText().toString(),
                     categoriesSpinner.getSelectedItem().toString(),
@@ -67,10 +75,10 @@ public class AddExpenseFragment extends Fragment {
         return view;
     }
 
-    void sendExpense(ExpenseModel expense) {
-        new ExpenseRepository().createExpense(expense, new ApiCallback<>() {
+    void sendExpense(Expense expense) {
+        new ExpenseRepository().createExpense(expense, new IApiCallback<>() {
             @Override
-            public void onSuccess(ExpenseModel createdExpense) {
+            public void onSuccess(Expense createdExpense) {
                 requireActivity().runOnUiThread(() -> {
                     Toast.makeText(requireContext(), "Expense added!", Toast.LENGTH_SHORT).show();
                     clearUI();

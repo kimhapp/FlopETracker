@@ -1,17 +1,19 @@
-package com.flopetracker.MainActivity;
+package com.flopetracker.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.flopetracker.LoginActivity;
+import com.flopetracker.fragment.AddExpenseFragment;
+import com.flopetracker.fragment.ExpenseListFragment;
+import com.flopetracker.fragment.HomeFragment;
+import com.flopetracker.fragment.SettingFragment;
 import com.flopetracker.R;
 import com.flopetracker.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
     FirebaseAuth mAuth;
 
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (item.getItemId() == R.id.list_button) {
                 transaction.replace(R.id.fragment_container, new ExpenseListFragment());
+            }
+            else if (item.getItemId() == R.id.setting_button) {
+                transaction.replace(R.id.fragment_container, new SettingFragment());
             }
             else if (item.getItemId() == R.id.logout_button) {
                 logOutUser();
