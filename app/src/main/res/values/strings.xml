@@ -8,7 +8,7 @@
 
     <!-- Translatable -->
     <!-- Buttons -->
-    <string name="button_add_expense">Add Expense</string>
+    <string name="add_expense">Add Expense</string>
     <string name="button_view_expense">View Detail Expense</string>
     <string name="button_expense_list">Expense List</string>
     <string name="button_setting">Setting</string>

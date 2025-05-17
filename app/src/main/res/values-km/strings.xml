@@ -1,6 +1,6 @@
 <resources>
     <!-- Buttons -->
-    <string name="button_add_expense">បន្ថែមការចំណាយ</string>
+    <string name="add_expense">បន្ថែមការចំណាយ</string>
     <string name="button_view_expense">មើលលម្អិតការចំណាយ</string>
     <string name="button_expense_list">បញ្ជីចំណាយ</string>
     <string name="button_setting">ការកំណត់</string>

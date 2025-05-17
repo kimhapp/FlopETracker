@@ -39,15 +39,9 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
         String amountLabel = context.getString(R.string.label_amount) + ": " + item.getAmount() + " " + item.getCurrency();
         String categoryLabel = context.getString(R.string.label_category) + ": " + item.getCategory();
-        String dateLabel = context.getString(R.string.label_date) + ": " + item.getDate();
-        String remarkLabel = context.getString(R.string.label_remark) + ": " + item.getRemark();
-        String createdByLabel = context.getString(R.string.label_created_by) + ": " + item.getUser();
 
         holder.binding.amount.setText(amountLabel);
         holder.binding.category.setText(categoryLabel);
-        holder.binding.date.setText(dateLabel);
-        holder.binding.remark.setText(remarkLabel);
-        holder.binding.createdBy.setText(createdByLabel);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailExpenseActivity.class);

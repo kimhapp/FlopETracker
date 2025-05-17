@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
+
 import com.flopetracker.repository.IApiCallback;
 import com.flopetracker.repository.ExpenseRepository;
 import com.flopetracker.R;
@@ -18,6 +20,8 @@ import com.flopetracker.model.Expense;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+
         binding = ActivityDetailExpenseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -51,7 +55,7 @@ import com.flopetracker.model.Expense;
     void updateUI(ActivityDetailExpenseBinding binding, Expense selectedExpense) {
         if (selectedExpense != null) {
             String idLabel = getString(R.string.label_Id) + " " + selectedExpense.getId();
-            binding.id.setText(idLabel);
+            binding.expenseId.setText(idLabel);
 
             String amountLabel = getString(R.string.label_amount) + ": " + selectedExpense.getAmount() + " " + selectedExpense.getCurrency();
             binding.amount.setText(amountLabel);
