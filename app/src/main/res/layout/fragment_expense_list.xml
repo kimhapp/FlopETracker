@@ -8,8 +8,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_expense"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/expense_progress_bar"

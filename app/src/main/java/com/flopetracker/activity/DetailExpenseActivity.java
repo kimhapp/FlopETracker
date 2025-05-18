@@ -31,7 +31,12 @@ import com.flopetracker.model.Expense;
             expenseId = receiveIntent.getExtras().getString("expenseId");
         }
 
-        binding.backHomeButton.setOnClickListener(item -> startActivity(new Intent(this, MainActivity.class)));
+        binding.backHomeButton.setOnClickListener(item -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("selectedItemId", R.id.list_button);
+
+            startActivity(intent);
+        });
 
         fetchExpense(expenseId);
     }
