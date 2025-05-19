@@ -27,7 +27,6 @@ public class ExpenseListFragment extends Fragment {
     int currentPage = 1;
     ExpenseRepository repository;
     ExpenseAdapter expenseAdapter;
-    List<Expense> expenseList = new ArrayList<>();
     private static int PRE_LOAD_ITEMS = 1;
     boolean isLoading = false;
 

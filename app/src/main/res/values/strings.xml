@@ -57,4 +57,5 @@
         <item>Others</item>
     </string-array>
     <string name="label_expense_id">Expense Id:</string>
+    <string name="hide_categories">Hide existing categories</string>
 </resources>

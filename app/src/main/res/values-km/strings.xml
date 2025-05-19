@@ -37,5 +37,6 @@
     <string name="label_setting">ការកំណត់កម្មវិធី</string>
     <string name="label_setting_msg">កំណត់រចនាសម្ព័ន្ធចំណូលចិត្តរបស់អ្នកខាងក្រោម, flops</string>
     <string name="label_expense_id">Id របស់ការចំណាយ:</string>
+    <string name="hide_categories">បិទប្រភេទដែលមានស្រាប់</string>
 
 </resources>
