@@ -1,14 +1,30 @@
 package com.flopetracker.fragment;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -33,23 +49,62 @@ public class AddExpenseFragment extends Fragment {
     RadioGroup radioAmountCurrency;
     Spinner categoriesSpinner;
     TextInputEditText remarkInput;
+    ImageView imageView;
+    Button add_button, selectImage, captureImage;
     List<String> categoryNames = new ArrayList<>();
+    ActivityResultLauncher<Intent> cameraLauncher, imageLauncher;
+    Uri selectedImage;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_expense, container, false);
+        StorageReference
+
+        cameraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Bundle extras = result.getData().getExtras();
+                        Bitmap imageBitmap = (Bitmap) extras.get("data");
+                        if (imageBitmap != null) {
+                            requireActivity().runOnUiThread(() -> {
+                                imageView.setImageBitmap(imageBitmap);
+                                imageView.setVisibility(View.VISIBLE);
+                            });
+                            Toast.makeText(requireContext(), "Image captured!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+        imageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        selectedImage = result.getData().getData();
+                        if (selectImage != null) {
+                            requireActivity().runOnUiThread(() -> {
+                                imageView.setImageURI(selectedImage);
+                                imageView.setVisibility(View.VISIBLE);
+                            });
+                        }
+                    }
+                });
 
         categoriesSpinner = view.findViewById(R.id.categories_spinner);
-        loadCategories();
-
         ImageButton add_category_button = view.findViewById(R.id.add_categories_button);
+        add_button = view.findViewById(R.id.add_expense_button);
+        selectImage = view.findViewById(R.id.btn_select_image);
+        captureImage = view.findViewById(R.id.btn_capture_image);
+        imageView = view.findViewById(R.id.iv_image);
 
-        Button add_button = view.findViewById(R.id.add_expense_button);
+        loadCategories();
 
         add_category_button.setOnClickListener(v -> startActivity(new Intent(
                 requireContext(), NewCategoryActivity.class
         )));
+
+        captureImage.setOnClickListener(v -> startCaptureImageActivity());
+        selectImage.setOnClickListener(v -> startSelectImageActivity());
 
         add_button.setOnClickListener(v -> {
             amountInput = view.findViewById(R.id.amount_input);
@@ -66,7 +121,8 @@ public class AddExpenseFragment extends Fragment {
                     amount,
                     radioButton.getText().toString(),
                     categoriesSpinner.getSelectedItem().toString(),
-                    remarkInput.getText().toString()
+                    remarkInput.getText().toString(),
+                    selectedImage
             );
 
             sendExpense(createdExpense);
@@ -131,5 +187,20 @@ public class AddExpenseFragment extends Fragment {
         );
         categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoriesSpinner.setAdapter(categoriesAdapter);
+    }
+
+    private void startSelectImageActivity() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setDataAndType(selectedImage,"image/*");
+        imageLauncher.launch(intent);
+    }
+
+    private void startCaptureImageActivity() {
+        if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAPTURE);
+        } else {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            cameraLauncher.launch(cameraIntent);
+        }
     }
 }

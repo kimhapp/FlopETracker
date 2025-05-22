@@ -1,5 +1,7 @@
 package com.flopetracker.model;
 
+import android.net.Uri;
+
 import com.flopetracker.util.ISO8601DateAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.annotations.JsonAdapter;
@@ -35,7 +37,10 @@ public class Expense {
     @JsonAdapter(ISO8601DateAdapter.class)
     private Date date;
 
-    public Expense(double amount, String currency, String category, String remark) {
+    @SerializedName("receiptImageUrl")
+    private Uri imageUrl;
+
+    public Expense(double amount, String currency, String category, String remark, Uri imageUrl) {
         this.id = UUID.randomUUID().toString(); // Auto-generate unique ID
         this.remark = remark;
         this.amount = amount;
@@ -43,6 +48,7 @@ public class Expense {
         this.category = category;
         this.user = FirebaseAuth.getInstance().getCurrentUser().getUid();
         this.date = new Date();
+        this.imageUrl = imageUrl;
     }
 
     public String getId() { return id; }
@@ -52,6 +58,8 @@ public class Expense {
     public String getCategory() { return category; }
     public String getUser() { return user; }
     public Date getDate() { return date; }
+    public Uri getImageUrl() {return imageUrl;}
+    public void setImageUrl(Uri imageUrl) {this.imageUrl = imageUrl;}
 
     // Methods for data related calculations or logic
     public static double getTotalExpenseByCurrency(String currency, List<Expense> expenses) {

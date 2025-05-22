@@ -42,6 +42,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
         holder.binding.amount.setText(amountLabel);
         holder.binding.category.setText(categoryLabel);
+        holder.binding.ivImage.setImageURI();
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailExpenseActivity.class);

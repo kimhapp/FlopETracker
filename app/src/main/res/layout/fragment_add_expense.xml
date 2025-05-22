@@ -4,199 +4,208 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.AddExpenseFragment">
+    tools:context=".fragment.AddExpenseFragment"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false" >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/title"
-            style="@style/HeadingText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/add_expense"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/label_amount"
-            style="@style/NormalText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/label_amount"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/amount_layout"
-            style="@style/NoUnderlineTextInputLayout"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            app:hintEnabled="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_amount">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/amount_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/ui_border"
-                android:hint="@string/label_amount"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <RadioGroup
-            android:id="@+id/radio_amount_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/amount_layout">
-
-            <RadioButton
-                android:id="@+id/radioUSD"
+            <TextView
+                android:id="@+id/title"
+                style="@style/HeadingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/currency_usd" />
+                android:layout_marginTop="20dp"
+                android:text="@string/add_expense"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
-                android:id="@+id/radioKHR"
+            <TextView
+                android:id="@+id/label_amount"
+                style="@style/NormalText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/currency_khr" />
-        </RadioGroup>
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/label_amount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
 
-        <TextView
-            android:id="@+id/label_category"
-            style="@style/NormalText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/label_category"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radio_amount_currency" />
-
-        <Spinner
-            android:id="@+id/categories_spinner"
-            android:layout_width="320dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/spinner_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_category" />
-
-        <ImageButton
-            android:id="@+id/add_categories_button"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/label_add_category"
-            android:src="@drawable/baseline_add_box_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/categories_spinner"
-            app:layout_constraintTop_toBottomOf="@id/label_category" />
-
-        <TextView
-            android:id="@+id/label_remark"
-            style="@style/NormalText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/label_remark"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/categories_spinner" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/remark_layout"
-            style="@style/NoUnderlineTextInputLayout"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:minHeight="100dp"
-            app:hintEnabled="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_remark">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/remark_input"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/amount_layout"
+                style="@style/NoUnderlineTextInputLayout"
+                android:layout_width="370dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/ui_border"
-                android:gravity="top|start"
-                android:hint="@string/label_remark"
-                android:inputType="textMultiLine|textCapSentences"
-                android:maxLines="3"
-                android:minLines="3" />
-        </com.google.android.material.textfield.TextInputLayout>
+                app:hintEnabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_amount">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_capture_image"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/capture_image"
-            app:icon="@drawable/baseline_camera_alt_24"
-            app:iconGravity="start"
-            app:iconPadding="8dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_select_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/remark_layout" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ui_border"
+                    android:hint="@string/label_amount"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_select_image"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/select_image"
-            app:icon="@drawable/baseline_image_24"
-            app:iconGravity="start"
-            app:iconPadding="8dp"
-            app:layout_constraintBottom_toTopOf="@id/iv_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_capture_image" />
+            <RadioGroup
+                android:id="@+id/radio_amount_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/amount_layout">
 
-        <ImageView
-            android:id="@+id/iv_image"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_marginTop="20dp"
-            android:contentDescription="@string/image"
-            android:src="@drawable/baseline_image_24"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/add_expense_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_select_image" />
+                <RadioButton
+                    android:id="@+id/radioUSD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/currency_usd" />
 
-        <Button
-            android:id="@+id/add_expense_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            android:text="@string/add_expense"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_image" />
+                <RadioButton
+                    android:id="@+id/radioKHR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/currency_khr" />
+            </RadioGroup>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/label_category"
+                style="@style/NormalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/label_category"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radio_amount_currency" />
+
+            <Spinner
+                android:id="@+id/categories_spinner"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/spinner_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_category" />
+
+            <ImageButton
+                android:id="@+id/add_categories_button"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/label_add_category"
+                android:src="@drawable/baseline_add_box_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/categories_spinner"
+                app:layout_constraintTop_toBottomOf="@id/label_category" />
+
+            <TextView
+                android:id="@+id/label_remark"
+                style="@style/NormalText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/label_remark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/categories_spinner" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/remark_layout"
+                style="@style/NoUnderlineTextInputLayout"
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:minHeight="100dp"
+                app:hintEnabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_remark">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/remark_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ui_border"
+                    android:gravity="top|start"
+                    android:hint="@string/label_remark"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLines="3"
+                    android:minLines="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_capture_image"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/capture_image"
+                app:icon="@drawable/baseline_camera_alt_24"
+                app:iconGravity="start"
+                app:iconPadding="8dp"
+                app:layout_constraintBottom_toTopOf="@id/btn_select_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/remark_layout" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_select_image"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/select_image"
+                app:icon="@drawable/baseline_image_24"
+                app:iconGravity="start"
+                app:iconPadding="8dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_capture_image" />
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/image"
+                android:src="@drawable/baseline_image_24"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/add_expense_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_select_image" />
+
+            <Button
+                android:id="@+id/add_expense_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:text="@string/add_expense"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </FrameLayout>
