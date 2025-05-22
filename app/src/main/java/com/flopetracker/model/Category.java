@@ -1,14 +1,21 @@
 package com.flopetracker.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
 @Entity(tableName = "categories")
 public class Category {
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "id")
-    private int id;
+    private String id;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -18,14 +25,28 @@ public class Category {
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
+    @NonNull
+    public String getId() {return id;}
+    public void setId(@NonNull String id) {this.id = id;}
     public boolean getDefault() {return Default;}
-    public void setDefault(boolean Default) {this.Default = Default;}
 
-    public Category(int id, String name, boolean Default) {
-        this.id = id;
+    public Category(String name, boolean Default) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.Default = Default;
     }
+
+    public static List<Category> createDefault() {
+        return List.of(
+                new Category("Food", true),
+                new Category("Transport", true),
+                new Category("Shopping", true),
+                new Category("Beverage", true),
+                new Category("Entertainment", true),
+                new Category("Fitness", true),
+                new Category("Utilities", true),
+                new Category("Others", true)
+            );
+    }
+
 }

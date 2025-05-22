@@ -55,12 +55,10 @@ public class MainActivity extends BaseActivity {
             return true;
         });
 
-        Intent receiveIntent = getIntent();
-
-        if (receiveIntent != null && receiveIntent.getExtras() != null) {
-            binding.bottomNavigation.setSelectedItemId(receiveIntent.getExtras().getInt("selectedItemId"));
-        } else {
+        if(savedInstanceState == null){
             binding.bottomNavigation.setSelectedItemId(R.id.home_button);
+        }else{
+            binding.bottomNavigation.setSelectedItemId(savedInstanceState.getInt("selectedItemId"));
         }
     }
 

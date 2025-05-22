@@ -1,16 +1,12 @@
 package com.flopetracker.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.flopetracker.R;
-import com.flopetracker.activity.NewCategoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +39,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         holder.binding.tvCategoryName.setText(categoryNameLabel);
 
         if (item.getDefault()) {
-            holder.binding.buttonDelete.setVisibility(View.GONE);
+            holder.binding.buttonDelete.setEnabled(false);
         }
     }
 
@@ -58,10 +54,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public void addCategory(List<Category> newCategories) {
-        int startPosition = categories.size();
-        categories.addAll(newCategories);
-        notifyItemRangeInserted(startPosition, newCategories.size());
+    public void addCategory(Category category) {
+        if (!categories.contains(category)) {
+            categories.add(category);
+            notifyItemInserted(categories.size() - 1);
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

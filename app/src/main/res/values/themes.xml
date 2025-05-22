@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.FlopETracker" parent="Theme.MaterialComponents.Light">
+    <style name="Theme.FlopETracker" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primary_light_color</item>
         <item name="colorPrimaryVariant">@color/primary_dark_color</item>
         <item name="android:colorBackground">@color/background_light</item>

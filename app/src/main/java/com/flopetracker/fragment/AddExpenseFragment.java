@@ -15,6 +15,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.flopetracker.activity.NewCategoryActivity;
+import com.flopetracker.dao.AppDatabase;
+import com.flopetracker.dao.ICategoryDAO;
+import com.flopetracker.model.Category;
 import com.flopetracker.repository.IApiCallback;
 import com.flopetracker.repository.ExpenseRepository;
 import com.flopetracker.R;
@@ -22,11 +25,15 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import com.flopetracker.model.Expense;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddExpenseFragment extends Fragment {
     TextInputEditText amountInput;
     RadioGroup radioAmountCurrency;
     Spinner categoriesSpinner;
     TextInputEditText remarkInput;
+    List<String> categoryNames = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,14 +41,7 @@ public class AddExpenseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_expense, container, false);
 
         categoriesSpinner = view.findViewById(R.id.categories_spinner);
-
-        ArrayAdapter<CharSequence> categoriesAdapter = ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.categories_array,
-                android.R.layout.simple_spinner_item
-        );
-        categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categoriesSpinner.setAdapter(categoriesAdapter);
+        loadCategories();
 
         ImageButton add_category_button = view.findViewById(R.id.add_categories_button);
 
@@ -99,5 +99,37 @@ public class AddExpenseFragment extends Fragment {
         radioAmountCurrency.clearCheck();
         categoriesSpinner.setSelection(0);
         remarkInput.setText("");
+    }
+
+    private void loadCategories() {
+        new Thread(() -> {
+            AppDatabase db = AppDatabase.getInstance(requireContext());
+            ICategoryDAO categoryDAO = db.categoryDAO();
+            List<Category> categories = categoryDAO.getAllCategories();
+
+            if (categories.isEmpty()) {
+                categories = Category.createDefault();
+
+                for (Category category: categories) {
+                    categoryDAO.insertCategory(category);
+                }
+            }
+
+            for (Category category : categories) {
+                categoryNames.add(category.getName());
+            }
+
+            requireActivity().runOnUiThread(this::setUpAdapter);
+        }).start();
+    }
+
+    private void setUpAdapter() {
+        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                categoryNames
+        );
+        categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoriesSpinner.setAdapter(categoriesAdapter);
     }
 }

@@ -67,4 +67,5 @@ dependencies {
     implementation(libs.preference)
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
+    implementation(libs.glide)
 }
