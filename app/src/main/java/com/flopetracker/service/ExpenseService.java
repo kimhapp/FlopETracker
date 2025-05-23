@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -18,4 +19,7 @@ public interface ExpenseService {
 
     @POST("expenses")
     Call<Expense> createExpense(@Header("X-DB-NAME") String db_guid, @Body Expense expense);
+
+    @PATCH("expenses/{id}")
+    Call<Expense> updateExpense(@Header("X-DB-NAME") String db_guid, @Path("id") String id);
 }

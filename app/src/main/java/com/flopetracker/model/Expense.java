@@ -38,9 +38,9 @@ public class Expense {
     private Date date;
 
     @SerializedName("receiptImageUrl")
-    private Uri imageUrl;
+    private String imageUrl;
 
-    public Expense(double amount, String currency, String category, String remark, Uri imageUrl) {
+    public Expense(double amount, String currency, String category, String remark, String imageUrl) {
         this.id = UUID.randomUUID().toString(); // Auto-generate unique ID
         this.remark = remark;
         this.amount = amount;
@@ -58,8 +58,8 @@ public class Expense {
     public String getCategory() { return category; }
     public String getUser() { return user; }
     public Date getDate() { return date; }
-    public Uri getImageUrl() {return imageUrl;}
-    public void setImageUrl(Uri imageUrl) {this.imageUrl = imageUrl;}
+    public String getImageUrl() {return imageUrl;}
+    public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
 
     // Methods for data related calculations or logic
     public static double getTotalExpenseByCurrency(String currency, List<Expense> expenses) {

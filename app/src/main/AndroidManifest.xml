@@ -47,6 +47,17 @@
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
+        
+        <provider
+            android:authorities="com.flopetracker.fileProvider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files_path"/>
+        </provider>
     </application>
 
 </manifest>

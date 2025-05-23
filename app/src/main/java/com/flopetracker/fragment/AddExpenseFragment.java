@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -40,9 +41,17 @@ import com.flopetracker.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import com.flopetracker.model.Expense;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AddExpenseFragment extends Fragment {
     TextInputEditText amountInput;
@@ -55,25 +64,21 @@ public class AddExpenseFragment extends Fragment {
     ActivityResultLauncher<Intent> cameraLauncher, imageLauncher;
     Uri selectedImage;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private final FirebaseStorage storage = FirebaseStorage.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_expense, container, false);
-        StorageReference
 
         cameraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        Bundle extras = result.getData().getExtras();
-                        Bitmap imageBitmap = (Bitmap) extras.get("data");
-                        if (imageBitmap != null) {
-                            requireActivity().runOnUiThread(() -> {
-                                imageView.setImageBitmap(imageBitmap);
-                                imageView.setVisibility(View.VISIBLE);
-                            });
+                        requireActivity().runOnUiThread(() -> {
+                            imageView.setImageURI(selectedImage);
+                            imageView.setVisibility(View.VISIBLE);
                             Toast.makeText(requireContext(), "Image captured!", Toast.LENGTH_SHORT).show();
-                        }
+                        });
                     }
                 });
 
@@ -81,10 +86,11 @@ public class AddExpenseFragment extends Fragment {
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         selectedImage = result.getData().getData();
-                        if (selectImage != null) {
+                        if (selectedImage != null) {
                             requireActivity().runOnUiThread(() -> {
                                 imageView.setImageURI(selectedImage);
                                 imageView.setVisibility(View.VISIBLE);
+                                Toast.makeText(requireContext(), "Image selected!", Toast.LENGTH_SHORT).show();
                             });
                         }
                     }
@@ -122,7 +128,7 @@ public class AddExpenseFragment extends Fragment {
                     radioButton.getText().toString(),
                     categoriesSpinner.getSelectedItem().toString(),
                     remarkInput.getText().toString(),
-                    selectedImage
+                    selectedImage.toString()
             );
 
             sendExpense(createdExpense);
@@ -135,10 +141,37 @@ public class AddExpenseFragment extends Fragment {
         new ExpenseRepository().createExpense(expense, new IApiCallback<>() {
             @Override
             public void onSuccess(Expense createdExpense) {
-                requireActivity().runOnUiThread(() -> {
-                    Toast.makeText(requireContext(), "Expense added!", Toast.LENGTH_SHORT).show();
-                    clearUI();
-                });
+                if (selectedImage != null) {
+                    StorageReference storageReference = storage.getReference()
+                            .child("expense_images/" + createdExpense.getId() + ".jpg");
+
+                    storageReference.putFile(selectedImage).
+                            addOnSuccessListener(taskSnapshot -> {
+                                storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                                    createdExpense.setImageUrl(uri.toString());
+                                    new ExpenseRepository().updateExpense(createdExpense.getId(), new IApiCallback<Expense>() {
+                                        @Override
+                                        public void onSuccess(Expense result) {
+                                            requireActivity().runOnUiThread(() -> {
+                                                Toast.makeText(requireContext(), "Expense added!", Toast.LENGTH_SHORT).show();
+                                                clearUI();
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onError(String errorMessage) {
+
+                                        }
+                                    });
+                                });
+                            });
+                }
+                else {
+                    requireActivity().runOnUiThread(() -> {
+                        Toast.makeText(requireContext(), "Expense added!", Toast.LENGTH_SHORT).show();
+                        clearUI();
+                    });
+                }
             }
 
             @Override
@@ -155,6 +188,8 @@ public class AddExpenseFragment extends Fragment {
         radioAmountCurrency.clearCheck();
         categoriesSpinner.setSelection(0);
         remarkInput.setText("");
+        imageView.setImageURI(null);
+        imageView.setVisibility(View.GONE);
     }
 
     private void loadCategories() {
@@ -199,8 +234,21 @@ public class AddExpenseFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_IMAGE_CAPTURE);
         } else {
+            selectedImage = createUri();
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, selectedImage);
             cameraLauncher.launch(cameraIntent);
         }
+    }
+
+    private Uri createUri() {
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        File imageFile = new File(requireContext().getFilesDir(), "expense_img_" + timestamp + ".jpg");
+
+        return FileProvider.getUriForFile(
+                requireContext(),
+                "com.flopetracker.fileProvider",
+                imageFile
+        );
     }
 }

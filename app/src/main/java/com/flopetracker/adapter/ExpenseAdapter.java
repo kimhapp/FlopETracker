@@ -2,6 +2,7 @@ package com.flopetracker.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -42,7 +43,9 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
         holder.binding.amount.setText(amountLabel);
         holder.binding.category.setText(categoryLabel);
-        holder.binding.ivImage.setImageURI();
+        if (item.getImageUrl() != null) {
+            holder.binding.ivImage.setImageURI(Uri.parse(item.getImageUrl()));
+        }
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailExpenseActivity.class);

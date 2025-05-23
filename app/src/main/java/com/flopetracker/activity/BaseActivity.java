@@ -6,6 +6,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.flopetracker.util.LocaleHelper;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.appcheck.FirebaseAppCheck;
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory;
 
 public class BaseActivity extends AppCompatActivity {
     @Override
@@ -16,5 +19,10 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
+        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
+        firebaseAppCheck.installAppCheckProviderFactory(
+                PlayIntegrityAppCheckProviderFactory.getInstance()
+        );
     }
 }
