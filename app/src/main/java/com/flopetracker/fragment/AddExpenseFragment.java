@@ -5,14 +5,12 @@ import static android.app.Activity.RESULT_OK;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -23,30 +21,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.flopetracker.activity.NewCategoryActivity;
 import com.flopetracker.dao.AppDatabase;
 import com.flopetracker.dao.ICategoryDAO;
 import com.flopetracker.databinding.FragmentAddExpenseBinding;
-import com.flopetracker.databinding.FragmentExpenseListBinding;
 import com.flopetracker.model.Category;
 import com.flopetracker.repository.IApiCallback;
 import com.flopetracker.repository.ExpenseRepository;
-import com.flopetracker.R;
-import com.google.android.material.textfield.TextInputEditText;
 
 import com.flopetracker.model.Expense;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -54,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AddExpenseFragment extends Fragment {
     boolean isLoading = false;
@@ -65,7 +54,7 @@ public class AddExpenseFragment extends Fragment {
     private final FirebaseStorage storage = FirebaseStorage.getInstance();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAddExpenseBinding.inflate(inflater, container, false);
 
@@ -107,14 +96,13 @@ public class AddExpenseFragment extends Fragment {
             int selectedRadioId = binding.radioAmountCurrency.getCheckedRadioButtonId();
             RadioButton radioButton = binding.getRoot().findViewById(selectedRadioId);
 
-            double amount = Double.parseDouble(binding.amountInput.getText().toString());
+            double amount = Double.parseDouble(Objects.requireNonNull(binding.amountInput.getText()).toString());
 
             Expense createdExpense = new Expense(
                     amount,
                     radioButton.getText().toString(),
                     binding.categoriesSpinner.getSelectedItem().toString(),
-                    binding.remarkInput.getText().toString(),
-                    selectedImage.toString()
+                    Objects.requireNonNull(binding.remarkInput.getText()).toString()
             );
 
             sendExpense(createdExpense);
@@ -135,32 +123,14 @@ public class AddExpenseFragment extends Fragment {
                             .child("expense_images/" + createdExpense.getId() + ".jpg");
 
                     storageReference.putFile(selectedImage).
-                            addOnSuccessListener(taskSnapshot -> {
-                                storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                                    createdExpense.setImageUrl(uri.toString());
-                                    new ExpenseRepository().updateExpense(createdExpense.getId(), new IApiCallback<Expense>() {
-                                        @Override
-                                        public void onSuccess(Expense result) {
-                                            requireActivity().runOnUiThread(() -> {
-                                                Toast.makeText(requireContext(), "Expense added!", Toast.LENGTH_SHORT).show();
-                                                clearUI();
-                                                isLoading = false;
-                                                hideProgressBar();
-                                            });
-                                        }
-
-                                        @Override
-                                        public void onError(String errorMessage) {
-
-                                        }
-                                    });
-                                });
-                            }).addOnFailureListener(e -> {
-                                new ExpenseRepository().deleteExpense(createdExpense.getId(), new IApiCallback<Expense>() {
+                            addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                                createdExpense.setImageUrl(uri.toString());
+                                new ExpenseRepository().updateExpense(createdExpense.getId(), new IApiCallback<>() {
                                     @Override
                                     public void onSuccess(Expense result) {
                                         requireActivity().runOnUiThread(() -> {
-                                            Toast.makeText(requireContext(), "Expense fail to add!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(requireContext(), "Expense added!", Toast.LENGTH_SHORT).show();
+                                            clearUI();
                                             isLoading = false;
                                             hideProgressBar();
                                         });
@@ -171,7 +141,21 @@ public class AddExpenseFragment extends Fragment {
 
                                     }
                                 });
-                            });
+                            })).addOnFailureListener(e -> new ExpenseRepository().deleteExpense(createdExpense.getId(), new IApiCallback<>() {
+                                @Override
+                                public void onSuccess(Expense result) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        Toast.makeText(requireContext(), "Expense fail to upload image!", Toast.LENGTH_SHORT).show();
+                                        isLoading = false;
+                                        hideProgressBar();
+                                    });
+                                }
+
+                                @Override
+                                public void onError(String errorMessage) {
+
+                                }
+                            }));
                 }
                 else {
                     requireActivity().runOnUiThread(() -> {

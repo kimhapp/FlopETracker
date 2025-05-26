@@ -40,7 +40,7 @@ public class Expense {
     @SerializedName("receiptImageUrl")
     private String imageUrl;
 
-    public Expense(double amount, String currency, String category, String remark, String imageUrl) {
+    public Expense(double amount, String currency, String category, String remark) {
         this.id = UUID.randomUUID().toString(); // Auto-generate unique ID
         this.remark = remark;
         this.amount = amount;
@@ -48,7 +48,6 @@ public class Expense {
         this.category = category;
         this.user = FirebaseAuth.getInstance().getCurrentUser().getUid();
         this.date = new Date();
-        this.imageUrl = imageUrl;
     }
 
     public String getId() { return id; }
