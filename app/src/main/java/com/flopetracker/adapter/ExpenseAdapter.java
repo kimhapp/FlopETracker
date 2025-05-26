@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.flopetracker.R;
 import com.flopetracker.activity.DetailExpenseActivity;
 
@@ -43,8 +45,13 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
         holder.binding.amount.setText(amountLabel);
         holder.binding.category.setText(categoryLabel);
-        if (item.getImageUrl() != null) {
-            holder.binding.ivImage.setImageURI(Uri.parse(item.getImageUrl()));
+        if (item.getImageUrl() != null && !item.getImageUrl().isEmpty()) {
+            Glide.with(context)
+                    .load(item.getImageUrl())
+                    .placeholder(R.drawable.baseline_image_24)
+                    .error(R.drawable.baseline_image_24)
+                    .centerCrop()
+                    .into(holder.binding.ivImage);
         }
 
         holder.itemView.setOnClickListener(v -> {

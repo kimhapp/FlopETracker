@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
+import com.bumptech.glide.Glide;
 import com.flopetracker.repository.IApiCallback;
 import com.flopetracker.repository.ExpenseRepository;
 import com.flopetracker.R;
@@ -54,6 +55,14 @@ import com.flopetracker.model.Expense;
 
     void updateUI(ActivityDetailExpenseBinding binding, Expense selectedExpense) {
         if (selectedExpense != null) {
+            if (selectedExpense.getImageUrl() != null && !selectedExpense.getImageUrl().isEmpty()) {
+                Glide.with(this)
+                        .load(selectedExpense.getImageUrl())
+                        .placeholder(R.drawable.baseline_image_24)
+                        .error(R.drawable.baseline_image_24)
+                        .centerCrop()
+                        .into(binding.ivImage);
+            }
             String idLabel = getString(R.string.label_Id) + " " + selectedExpense.getId();
             binding.expenseId.setText(idLabel);
 

@@ -99,4 +99,24 @@ public class ExpenseRepository {
             }
         });
     }
+
+    public void deleteExpense(String id, final IApiCallback<Expense> callback) {
+        Call<Expense> call = expenseService.deleteExpense(db_guid, id);
+
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<Expense> call, Response<Expense> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onError("Error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Expense> call, Throwable throwable) {
+                callback.onError("Network Error: " + throwable.getMessage());
+            }
+        });
+    }
 }

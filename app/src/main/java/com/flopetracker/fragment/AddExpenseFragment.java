@@ -34,6 +34,8 @@ import android.widget.Toast;
 import com.flopetracker.activity.NewCategoryActivity;
 import com.flopetracker.dao.AppDatabase;
 import com.flopetracker.dao.ICategoryDAO;
+import com.flopetracker.databinding.FragmentAddExpenseBinding;
+import com.flopetracker.databinding.FragmentExpenseListBinding;
 import com.flopetracker.model.Category;
 import com.flopetracker.repository.IApiCallback;
 import com.flopetracker.repository.ExpenseRepository;
@@ -54,12 +56,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class AddExpenseFragment extends Fragment {
-    TextInputEditText amountInput;
-    RadioGroup radioAmountCurrency;
-    Spinner categoriesSpinner;
-    TextInputEditText remarkInput;
-    ImageView imageView;
-    Button add_button, selectImage, captureImage;
+    boolean isLoading = false;
+    FragmentAddExpenseBinding binding;
     List<String> categoryNames = new ArrayList<>();
     ActivityResultLauncher<Intent> cameraLauncher, imageLauncher;
     Uri selectedImage;
@@ -69,14 +67,14 @@ public class AddExpenseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_expense, container, false);
+        binding = FragmentAddExpenseBinding.inflate(inflater, container, false);
 
         cameraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         requireActivity().runOnUiThread(() -> {
-                            imageView.setImageURI(selectedImage);
-                            imageView.setVisibility(View.VISIBLE);
+                            binding.ivImage.setImageURI(selectedImage);
+                            binding.ivImage.setVisibility(View.VISIBLE);
                             Toast.makeText(requireContext(), "Image captured!", Toast.LENGTH_SHORT).show();
                         });
                     }
@@ -88,56 +86,47 @@ public class AddExpenseFragment extends Fragment {
                         selectedImage = result.getData().getData();
                         if (selectedImage != null) {
                             requireActivity().runOnUiThread(() -> {
-                                imageView.setImageURI(selectedImage);
-                                imageView.setVisibility(View.VISIBLE);
+                                binding.ivImage.setImageURI(selectedImage);
+                                binding.ivImage.setVisibility(View.VISIBLE);
                                 Toast.makeText(requireContext(), "Image selected!", Toast.LENGTH_SHORT).show();
                             });
                         }
                     }
                 });
 
-        categoriesSpinner = view.findViewById(R.id.categories_spinner);
-        ImageButton add_category_button = view.findViewById(R.id.add_categories_button);
-        add_button = view.findViewById(R.id.add_expense_button);
-        selectImage = view.findViewById(R.id.btn_select_image);
-        captureImage = view.findViewById(R.id.btn_capture_image);
-        imageView = view.findViewById(R.id.iv_image);
-
         loadCategories();
 
-        add_category_button.setOnClickListener(v -> startActivity(new Intent(
+        binding.addCategoriesButton.setOnClickListener(v -> startActivity(new Intent(
                 requireContext(), NewCategoryActivity.class
         )));
 
-        captureImage.setOnClickListener(v -> startCaptureImageActivity());
-        selectImage.setOnClickListener(v -> startSelectImageActivity());
+        binding.btnCaptureImage.setOnClickListener(v -> startCaptureImageActivity());
+        binding.btnSelectImage.setOnClickListener(v -> startSelectImageActivity());
 
-        add_button.setOnClickListener(v -> {
-            amountInput = view.findViewById(R.id.amount_input);
+        binding.addExpenseButton.setOnClickListener(v -> {
+            int selectedRadioId = binding.radioAmountCurrency.getCheckedRadioButtonId();
+            RadioButton radioButton = binding.getRoot().findViewById(selectedRadioId);
 
-            radioAmountCurrency = view.findViewById(R.id.radio_amount_currency);
-            int selectedRadioId = radioAmountCurrency.getCheckedRadioButtonId();
-            RadioButton radioButton = view.findViewById(selectedRadioId);
-
-            remarkInput = view.findViewById(R.id.remark_input);
-
-            double amount = Double.parseDouble(amountInput.getText().toString());
+            double amount = Double.parseDouble(binding.amountInput.getText().toString());
 
             Expense createdExpense = new Expense(
                     amount,
                     radioButton.getText().toString(),
-                    categoriesSpinner.getSelectedItem().toString(),
-                    remarkInput.getText().toString(),
+                    binding.categoriesSpinner.getSelectedItem().toString(),
+                    binding.remarkInput.getText().toString(),
                     selectedImage.toString()
             );
 
             sendExpense(createdExpense);
         });
 
-        return view;
+        return binding.getRoot();
     }
 
     void sendExpense(Expense expense) {
+        isLoading = true;
+        showProgressBar();
+
         new ExpenseRepository().createExpense(expense, new IApiCallback<>() {
             @Override
             public void onSuccess(Expense createdExpense) {
@@ -155,6 +144,8 @@ public class AddExpenseFragment extends Fragment {
                                             requireActivity().runOnUiThread(() -> {
                                                 Toast.makeText(requireContext(), "Expense added!", Toast.LENGTH_SHORT).show();
                                                 clearUI();
+                                                isLoading = false;
+                                                hideProgressBar();
                                             });
                                         }
 
@@ -163,6 +154,22 @@ public class AddExpenseFragment extends Fragment {
 
                                         }
                                     });
+                                });
+                            }).addOnFailureListener(e -> {
+                                new ExpenseRepository().deleteExpense(createdExpense.getId(), new IApiCallback<Expense>() {
+                                    @Override
+                                    public void onSuccess(Expense result) {
+                                        requireActivity().runOnUiThread(() -> {
+                                            Toast.makeText(requireContext(), "Expense fail to add!", Toast.LENGTH_SHORT).show();
+                                            isLoading = false;
+                                            hideProgressBar();
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onError(String errorMessage) {
+
+                                    }
                                 });
                             });
                 }
@@ -184,12 +191,12 @@ public class AddExpenseFragment extends Fragment {
     }
 
     void clearUI() {
-        amountInput.setText("");
-        radioAmountCurrency.clearCheck();
-        categoriesSpinner.setSelection(0);
-        remarkInput.setText("");
-        imageView.setImageURI(null);
-        imageView.setVisibility(View.GONE);
+        binding.amountInput.setText("");
+        binding.radioAmountCurrency.clearCheck();
+        binding.categoriesSpinner.setSelection(0);
+        binding.remarkInput.setText("");
+        binding.ivImage.setImageURI(null);
+        binding.ivImage.setVisibility(View.GONE);
     }
 
     private void loadCategories() {
@@ -221,7 +228,7 @@ public class AddExpenseFragment extends Fragment {
                 categoryNames
         );
         categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categoriesSpinner.setAdapter(categoriesAdapter);
+        binding.categoriesSpinner.setAdapter(categoriesAdapter);
     }
 
     private void startSelectImageActivity() {
@@ -250,5 +257,18 @@ public class AddExpenseFragment extends Fragment {
                 "com.flopetracker.fileProvider",
                 imageFile
         );
+    }
+    private void showProgressBar() {
+        if (binding != null) {
+            binding.expenseProgressBar.setVisibility(View.VISIBLE);
+            binding.addExpenseForm.setVisibility(View.GONE);
+        }
+    }
+
+    private void hideProgressBar() {
+        if (binding != null) {
+            binding.expenseProgressBar.setVisibility(View.GONE);
+            binding.addExpenseForm.setVisibility(View.VISIBLE);
+        }
     }
 }
